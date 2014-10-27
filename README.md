@@ -1,0 +1,4 @@
+foodscanner
+===========
+
+A school project
