@@ -20,15 +20,15 @@ angular.module('starter', ['ionic', 'ngCordova'])
 
 .controller('FormController', ['$http', function ($http) {
   this.result = [];
-  this.submit = function($http) {
-    $http.get('http://fsserver.kspri.se/?gtin=' + this.gtinInpt).success(function(data) {
-      result = data;
+  this.submit = function() {
+    $http.get('http://fsserver.kspri.se/api/get?gtin=' + this.gtinInpt).success(function(data) {
+      this.result = data;
     });
     console.log(this.result);
   };
 }])
 
-.controller("ScanController", function($scope, $cordovaBarcodeScanner) { 
+.controller("ScanController", ['$http', function ($scope, $cordovaBarcodeScanner, $http) { 
     $scope.scanBarcode = function() {
         $cordovaBarcodeScanner.scan().then(function(imageData) {
             alert(imageData.text);
@@ -38,5 +38,5 @@ angular.module('starter', ['ionic', 'ngCordova'])
             console.log("An error happened -> " + error);
         });
     }; 
-})
+}])
 

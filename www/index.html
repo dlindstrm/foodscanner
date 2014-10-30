@@ -30,14 +30,17 @@
         <h1 class="title">Foodscanner</h1>
       </ion-header-bar>
       <ion-content padding="true">
-        <form ng-controller="FormController as form" ng-submit="form.submit()">
-          <div class="list list-inset">
-            <label class="item item-input">
-              <i class="icon ion-search placeholder-icon"></i>
-              <input ng-model="form.gtinInpt" type="text" placeholder="Search GTIN">
-            </label>
-          </div>
-        </form>
+        <div ng-controller="FormController as form">
+          <form ng-submit="form.submit()">
+            <div class="list list-inset">
+              <label class="item item-input">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input ng-model="form.gtinInpt" type="text" placeholder="Search GTIN">
+              </label>
+            </div>
+          </form>
+          {{ form.result }}
+        </div>
         <p>or</p>
         <button class="button button-block button-positive" ng-controller="ScanController as scan" ng-click="scanBarcode()">
           Scan barcode
