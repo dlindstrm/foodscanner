@@ -1,0 +1,19 @@
+<ion-view title="Skanna">
+  <ion-nav-buttons side="right">
+    <button menu-toggle="right" class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+  <ion-content class="has-header">
+    <form ng-controller="FormController as form" ng-submit="form.submit()">
+      <div class="list list-inset">
+        <label class="item item-input">
+          <i class="icon ion-search placeholder-icon"></i>
+          <input ng-model="form.gtinInpt" type="number" placeholder="Skriv in streckkod">
+        </label>
+      </div>
+    </form>
+    <p>or</p>
+    <button class="button button-block button-positive" ng-controller="ScanController as scan" ng-click="scanBarcode()">
+      Skanna streckkod
+    </button>
+  </ion-content>
+</ion-view>

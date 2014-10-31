@@ -1,0 +1,29 @@
+<ion-view title="Produkt">
+  <ion-nav-buttons side="right">
+    <button menu-toggle="right" class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+  <ion-content ng-controller="ArticleController as article" padding="true" class="has-header">
+    <div class="row">
+      <div class="col"><h1>{{ item.dabas.name }}</h1></div>
+    </div>
+    <div class="row">
+      <div class="col" ng-show="item.dabas.images[0].Lank"><img style="max-width:100%" ng-src="{{item.dabas.images[0].Lank}}" /></div>
+      <div class="col">
+        <ul class="list">
+            <li class="item" ng-show="item.carbon > 0">
+            <h2>{{item.carbon}} g CO<sub>2</sub></h2>
+            </li>
+            <li class="item" ng-show="item.dabas.weight > 0">
+            <strong>Vikt:</strong> {{ item.dabas.weight }} g
+            </li>
+            <li class="item" ng-show="item.dabas.country">
+            {{item.dabas.country}}
+            </li>
+            <li class="item" ng-show="item.dabas.producer">
+            {{item.dabas.producer}}
+            </li>
+        </ul>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

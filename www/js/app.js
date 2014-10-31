@@ -3,7 +3,8 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic', 'ngCordova'])
+// 'starter.controllers' is found in controllers.js
+angular.module('foodscan', ['ionic', 'ngCordova', 'foodscan.controllers', 'foodscan.services'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -13,30 +14,51 @@ angular.module('starter', ['ionic', 'ngCordova'])
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
     }
     if(window.StatusBar) {
+      // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
   });
 })
 
-.controller('FormController', ['$http', function ($http) {
-  this.result = [];
-  this.submit = function($http) {
-    $http.get('http://fsserver.kspri.se/?gtin=' + this.gtinInpt).success(function(data) {
-      result = data;
-    });
-    console.log(this.result);
-  };
-}])
+.config(function($stateProvider, $urlRouterProvider) {
+  $stateProvider
 
-.controller("ScanController", function($scope, $cordovaBarcodeScanner) { 
-    $scope.scanBarcode = function() {
-        $cordovaBarcodeScanner.scan().then(function(imageData) {
-            alert(imageData.text);
-            console.log("Barcode Format -> " + imageData.format);
-            console.log("Cancelled -> " + imageData.cancelled);
-        }, function(error) {
-            console.log("An error happened -> " + error);
-        });
-    }; 
+    .state('app', {
+      url: "/app",
+      abstract: true,
+      templateUrl: "templates/menu.html"
+    })
+
+    .state('app.start', {
+      url: "/start",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/start.html"
+        }
+      }
+    })
+
+    .state('app.scan', {
+      url: "/scan",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/scan.html"
+        }
+      }
+    })
+    .state('app.article', {
+      url: "/article/:gtin",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/article.html"
+        }
+      }
+    });
+  // if none of the above states are matched, use this as the fallback
+  $urlRouterProvider.otherwise('/app/start');
 })
+
+.constant('$ionicLoadingConfig', {
+  template: 'Default Loading Template...'
+});
 
