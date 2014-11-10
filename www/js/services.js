@@ -1,6 +1,6 @@
 angular.module('foodscan.services', [])
 
-.factory('Articles', function($http) {
+.factory('Articles', function($http, $location, $ionicLoading) {
   
   var url = "http://fsserver.kspri.se/api/get";
   var articles = [
@@ -21,7 +21,8 @@ angular.module('foodscan.services', [])
                   Lank: "http://www.dabas.com/media/skanemejerier-storhushall/7310867002394_v.jpg"
               }
           ],
-          labels: []
+          ingredients:[{"name":"Kebabkött"},{"name":"Goudaost"},{"name":"Vetemjöl","carbon":22}],
+          labels:[{"Typ":"Nyckelhålet","Typkod":"NYCKELHAL_MARK"}]
       },
       productgroup: {
           vendingArea: {
@@ -67,14 +68,26 @@ angular.module('foodscan.services', [])
   
   return {
 
-    httpGet: function(gtin, callback) {
+    goTo: function(gtin) {
+      console.log(gtin);
+      $ionicLoading.show();
+      gtin = gtin.toString();
+      while(gtin.length < 14) {
+        gtin = "0" + gtin;
+      }
+
       $http.get(url + '?gtin=' + gtin)
       .success(function(data, status) {
         articles.push(data);
-        return callback(status, data);
+        if(status !== 200) {
+          $ionicLoading.hide()
+          return alert("Ingen artikel hittades.")
+        }
+        $location.path("/app/article/"+gtin)
       })
       .error(function(status, data) {
-        return callback(status);
+        $ionicLoading.hide();
+        return alert("Ingen artikel hittades.")
       });
     },
 
@@ -88,4 +101,11 @@ angular.module('foodscan.services', [])
       return callback("error", null);
     }
   }
+})
+
+.factory('Labels', function() {
+  var labels = {
+    
+  }
+
 });

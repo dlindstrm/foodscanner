@@ -1,0 +1,38 @@
+<ion-view hide-nav-bar="true" ng-controller="SearchController as search">
+<ion-header-bar class="bar bar-header item-input-inset">
+ 	<label class="item-input-wrapper">
+    	<i class="icon ion-ios7-search placeholder-icon"></i>
+    	<input ng-model="search.searchInput" ng-change="search.change()" type="search" placeholder="Sök artikel">
+  	</label>
+  	<button class="button button-clear" ng-click="search.cancel()">
+    	Cancel
+  	</button>
+</ion-header-bar>
+<ion-content>
+  <div ng-show="articles.length > 0">
+  	<ul class="list">
+  		<li ng-click="search.goto({{article.gtin}})" ng-repeat="article in articles" class="item">
+  			{{ article.name }}
+  		</li>
+  	</ul>
+    <button ng-click="search.showAll()" class="button button-full">
+      Visa alla resultat
+    </button>
+  </div>
+  <div ng-show="showPrevious === true && previousSearches.length > 0">
+    <h3>Tidigare sökningar</h3>
+    <ul class="list">
+      <li ng-repeat="key in previousSearches" ng-click="search.setInput(key)" class="item">
+        {{ key }}
+      </li>
+      <li class="item" ng-click="search.clearPrevious()">
+        Rensa historik
+      </li>
+    </ul>
+  </div>
+  <p ng-show="noResult === true">Inga resultat. Vänligen försök igen.</p>
+  <div ng-show="loader === true">
+    <i class="icon ion-loading-c"></i>
+  </div>
+</ion-content>
+</ion-view>

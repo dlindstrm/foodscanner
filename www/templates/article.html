@@ -3,27 +3,62 @@
     <button menu-toggle="right" class="button button-icon icon ion-navicon"></button>
   </ion-nav-buttons>
   <ion-content ng-controller="ArticleController as article" padding="true" class="has-header">
+    <h1>{{ item.dabas.name }}</h1>
     <div class="row">
-      <div class="col"><h1>{{ item.dabas.name }}</h1></div>
-    </div>
-    <div class="row">
-      <div class="col" ng-show="item.dabas.images[0].Lank"><img style="max-width:100%" ng-src="{{item.dabas.images[0].Lank}}" /></div>
+      <div class="col" ng-show="item.dabas.images[0].Lank"><img style="max-width:100%;max-height:200px" ng-src="{{item.dabas.images[0].Lank}}" /></div>
       <div class="col">
-        <ul class="list">
-            <li class="item" ng-show="item.carbon > 0">
-            <h2>{{item.carbon}} g CO<sub>2</sub></h2>
-            </li>
-            <li class="item" ng-show="item.dabas.weight > 0">
+        <h2>{{item.carbon}} g CO<sub>2</sub></h2>
+        <ion-list>
+            <ion-item ng-show="item.dabas.weight > 0">
             <strong>Vikt:</strong> {{ item.dabas.weight }} g
-            </li>
-            <li class="item" ng-show="item.dabas.country">
+            </ion-item>
+            <ion-item ng-show="item.dabas.country">
             {{item.dabas.country}}
-            </li>
-            <li class="item" ng-show="item.dabas.producer">
+            </ion-item>
+            <ion-item class="item" ng-show="item.dabas.producer">
             {{item.dabas.producer}}
-            </li>
-        </ul>
+            </ion-item>
+        </ion-list>
       </div>
     </div>
+    <ion-list>
+        <ion-item class="item item-icon-right" ng-show="item.dabas.ingredients.length > 0" ng-click="show('ingredients')">
+          Ingredienser
+          <i class="icon ion-chevron-down"></i>
+        </ion-item>
+        <div class="accordion-content" ng-show="accordion.ingredients === 1">
+          <div class="row" ng-repeat="ingredient in item.dabas.ingredients">
+            <div class="col">{{ ingredient.name }}</div>
+            <div ng-show="ingredient.carbon" class="col">{{ ingredient.carbon }} CO<sub>2</sub> per gram</div>
+          </div>
+        </div>
+        <ion-item class="item item-icon-right" ng-show="item.lcafd" ng-click="show('carbon')">
+          Koldioxidinformation
+          <i class="icon ion-chevron-down"></i>
+        </ion-item>
+        <div class="accordion-content" ng-show="accordion.carbon === 1">
+          <p><strong>Genomsnittligt utsläpp:</strong> {{ item.lcafd.average }} g CO<sub>2</sub> per gram</p>
+          <p><strong>Max utsläpp:</strong> {{ item.lcafd.max }} g CO<sub>2</sub> per gram</p>
+          <p><strong>Min utsläpp:</strong> {{ item.lcafd.min }} g CO<sub>2</sub> per gram</p>
+          <p><strong>Källa:</strong> <a href="http://crowd.kasperi.se/web/livsmedel/{{ item.lcafd.id }}">LCAFD</a></p>
+        </div>
+        <ion-item class="item item-icon-right" ng-show="item.dabas.labels.length > 0" ng-click="show('labels')">
+          Miljömärkningar
+          <i class="icon ion-chevron-down"></i>
+        </ion-item>
+        <div class="accordion-content" ng-show="accordion.labels === 1">
+          <p>labels</p>
+        </div>
+        <ion-item class="item item-icon-right" ng-click="show('categories')">
+          Varukategorier
+          <i class="icon ion-chevron-down"></i>
+        </ion-item>
+        <div class="accordion-content" ng-show="accordion.categories === 1">
+          <p ng-show="item.productgroup.vendingArea"><strong>Varuområde:</strong> {{ item.productgroup.vendingArea.article }}</p>
+          <p ng-show="item.productgroup.majorGroup"><strong>Huvudgrupp:</strong> {{ item.productgroup.majorGroup.article }}</p>
+          <p ng-show="item.productgroup.vendingGroup"><strong>Varugrupp:</strong> {{ item.productgroup.vendingGroup.article }}</p>
+          <p ng-show="item.productgroup.vendingUnderGroup"><strong>Varuundergrupp:</strong> {{ item.productgroup.vendingUnderGroup.article }}</p>
+        </div>
+    </ion-list>
   </ion-content>
 </ion-view>
