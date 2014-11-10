@@ -9,9 +9,8 @@ angular.module('foodscan.controllers', [])
 .controller("ScanController", function($scope, $cordovaBarcodeScanner, Articles) { 
   $scope.scanBarcode = function() {
       $cordovaBarcodeScanner.scan().then(function(imageData) {
-          if(imageData.format === ("EAN_8" || "EAN_13")) {
-            Articles.goTo(imageData.text);
-          }
+          alert("Format: "+imageData.format+"Code: "+imageData.text);
+          Articles.goTo(imageData.text);
       }, function(error) {
           console.log("An error happened -> " + error);
       });
