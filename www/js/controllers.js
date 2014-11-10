@@ -1,22 +1,17 @@
 angular.module('foodscan.controllers', [])
 
-.controller('FormController', function ($location, $scope, $ionicLoading, Articles) {
+.controller('FormController', function ($scope, Articles) {
   this.submit = function() {
-      $ionicLoading.show();
-      $scope.input = this.gtinInpt.toString();
-      while($scope.input.length < 14) {
-        $scope.input = "0" + $scope.input;
-      }
-      Articles.goTo($scope.input);
+      Articles.goTo(this.gtinInpt);
   };
 })
 
-.controller("ScanController", function($scope, $cordovaBarcodeScanner) { 
+.controller("ScanController", function($scope, $cordovaBarcodeScanner, Articles) { 
   $scope.scanBarcode = function() {
       $cordovaBarcodeScanner.scan().then(function(imageData) {
-          alert(imageData.text);
-          console.log("Barcode Format -> " + imageData.format);
-          console.log("Cancelled -> " + imageData.cancelled);
+          if(imageData.format === ("EAN_8" || "EAN_13")) {
+            Articles.goTo(imageData.text);
+          }
       }, function(error) {
           console.log("An error happened -> " + error);
       });
