@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('foodscan', ['ionic', 'ngCordova', 'underscore', 'foodscan.controllers', 'foodscan.services'])
+angular.module('foodscan', ['ionic', 'ngCordova', 'underscore', 'foodscan.scanController', 'foodscan.articleController', 'foodscan.searchController', 'foodscan.searchResultController', 'foodscan.services'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -38,15 +38,6 @@ angular.module('foodscan', ['ionic', 'ngCordova', 'underscore', 'foodscan.contro
       }
     })
 
-    .state('app.scan', {
-      url: "/scan",
-      views: {
-        'menuContent' :{
-          templateUrl: "templates/scan.html"
-        }
-      }
-    })
-
     .state('app.article', {
       url: "/article/:gtin",
       views: {
@@ -64,8 +55,9 @@ angular.module('foodscan', ['ionic', 'ngCordova', 'underscore', 'foodscan.contro
         }
       }
     })
+
     .state('app.searchresult', {
-      url: "/search/:key",
+      url: "/result/:key",
       views: {
         'menuContent' :{
           templateUrl: "templates/searchResult.html"

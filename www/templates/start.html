@@ -1,8 +1,11 @@
 <ion-view title="Foodscanner">
-  <ion-content class="has-header" scroll="false">
-    <a href="#/app/scan" class="button button-full start-item scan">Skanna</a>
+  <ion-content class="has-header" scroll="false">    
+
+  	<button class="button button-full start-item scan" ng-controller="ScanController as scan" ng-click="scanBarcode()">
+      Skanna streckkod
+    </button>
     <a href="#/app/search" class="button button-full start-item search">Sök</a>
     <a href="#/app/browse" class="button button-full start-item scan">Bläddra</a>
-    <a href="#/app/browse" class="button button-full start-item scan">Favoriter</a>
+    <a href="#/app/favorites" class="button button-full start-item scan">Favoriter</a>
   </ion-content>
 </ion-view>

@@ -1,6 +1,6 @@
 angular.module('foodscan.services', [])
 
-.factory('Articles', function($http, $location, $ionicLoading) {
+.factory('Articles', function($http, $location, $ionicLoading, _) {
   
   var url = "http://fsserver.kspri.se/api/get";
   var articles = [
@@ -69,11 +69,18 @@ angular.module('foodscan.services', [])
   return {
 
     goTo: function(gtin) {
-      console.log(gtin);
       $ionicLoading.show();
       gtin = gtin.toString();
       while(gtin.length < 14) {
         gtin = "0" + gtin;
+      }
+
+      var exists = _.find(articles, function(obj) {
+        return obj.dabas.GTIN === gtin;
+      })
+      if(exists) {
+        $ionicLoading.hide();
+        return $location.path("/app/article/"+gtin)
       }
 
       $http.get(url + '?gtin=' + gtin)
@@ -92,13 +99,13 @@ angular.module('foodscan.services', [])
     },
 
     getArticle: function(gtin, callback) {
-      for(var i = 0; i < articles.length; i++) {
-        var a = articles[i];
-        if(a.dabas.GTIN === gtin) {
-          return callback(null, a);
-        }
-      }
-      return callback("error", null);
+      var article = _.find(articles, function(obj) {
+        return obj.dabas.GTIN === gtin;
+      })
+      if(!article)
+        return callback("error", null);
+
+      return callback(null, article);
     }
   }
 })
@@ -108,4 +115,25 @@ angular.module('foodscan.services', [])
     
   }
 
+})
+
+.factory('SearchResult', function() {
+  var result = [];
+
+  return {
+
+    set: function(articles) {
+      result = articles;
+    },
+
+    append: function(articles) {
+      for(var i = 0; i<articles.length; i++) {
+        result.push(articles[i]);
+      }
+    },
+
+    get: function() {
+      return result;
+    }
+  }
 });

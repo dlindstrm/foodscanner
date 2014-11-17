@@ -11,8 +11,10 @@
 <ion-content>
   <div ng-show="articles.length > 0">
   	<ul class="list">
-  		<li ng-click="search.goto({{article.gtin}})" ng-repeat="article in articles" class="item">
-  			{{ article.name }}
+  		<li ng-click="search.goto({{article.dabas.GTIN}})" ng-repeat="article in articles" ng-class="article.dabas.images[0].Lank ? 'item-avatar' : ''" class="item">
+        <img ng-show="article.dabas.images[0].Lank" ng-src="{{article.dabas.images[0].Lank}}"/>
+  			<h2>{{ article.dabas.name }}</h2>
+        <p><strong>{{ article.dabas.producer }}</strong> {{ article.dabas.country }}</p>
   		</li>
   	</ul>
     <button ng-click="search.showAll()" class="button button-full">

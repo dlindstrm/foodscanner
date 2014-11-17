@@ -10,8 +10,17 @@
   <ion-side-menu side="right">
     <ion-content>
       <ion-list>
-        <ion-item nav-clear menu-close href="#/app/scan">
-          Scan
+        <ion-item nav-clear menu-close ng-controller="ScanController as scan" ng-click="scanBarcode()">
+          Skanna streckkod
+        </ion-item>
+        <ion-item nav-clear menu-close href="#/app/search">
+          Sök
+        </ion-item>
+        <ion-item nav-clear menu-close href="#/app/browse">
+          Bläddra
+        </ion-item>
+        <ion-item nav-clear menu-close href="#/app/favorites">
+          Favoriter
         </ion-item>
       </ion-list>
     </ion-content>
