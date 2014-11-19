@@ -1,21 +1,21 @@
-<ion-view title="Sökresultat" class="has-tabs-top">
+<ion-view title="Sökresultat" class="has-tabs-top" ng-controller="SearchResultController as result">
   <ion-nav-buttons side="right">
     <button menu-toggle="right" class="button button-icon icon ion-navicon"></button>
   </ion-nav-buttons>
   <div class="tabs-striped tabs-top tabs-light">
     <div class="tabs">
-      <a class="tab-item" href="#">
+      <div class="tab-item" ng-click="openModal(0)">
         Kategorier
-      </a>
-      <a class="tab-item" href="#">
+      </div>
+      <div class="tab-item" ng-click="openModal(1)">
         Filtrera
-      </a>
-      <a class="tab-item" href="#">
+      </div>
+      <div class="tab-item" ng-click="popover.show($event)">
         Sortera
-      </a>
+      </div>
     </div>
   </div>
-  <ion-content ng-controller="SearchResultController as result" padding="false" class="has-header">
+  <ion-content padding="false" class="has-header">
    <div ng-show="articles.length > 0">
   	<ul class="list">
   		<li ng-click="result.goto({{article.dabas.GTIN}})" ng-repeat="article in articles" ng-class="article.dabas.images[0].Lank ? 'item-avatar' : ''" class="item">
@@ -30,4 +30,49 @@
     </button>
   </div>
   </ion-content>
+
+  <script id="categories.html" type="text/ng-template">
+    <ion-modal-view>
+      <ion-header-bar>
+        <div class="button button-clear" ng-click="closeModal(1)">Avbryt</div>
+        <h1 class="title">Kategorier</h1>
+  	  <div class="button button-clear" ng-click="closeModal(1)">Välj</div>
+      </ion-header-bar>
+      <ion-content>
+        Hello!
+      </ion-content>
+    </ion-modal-view>
+  </script>
+
+  <script id="filter.html" type="text/ng-template">
+    <ion-modal-view>
+      <ion-header-bar>
+        <div class="button button-clear" ng-click="closeModal(2)">Avbryt</div>
+        <h1 class="title">Filtrera</h1>
+  	  <div class="button button-clear" ng-click="closeModal(2)">Välj</div>
+      </ion-header-bar>
+      <ion-content>
+        Hello!
+      </ion-content>
+    </ion-modal-view>
+  </script>
+
+  <script id="templates/sort.html" type="text/ng-template">
+    <ion-popover-view>
+        <div class="list">
+          <div class="item" ng-click="sort()">
+            Namn
+          </div>
+          <div class="item" ng-click="sort()">
+            Koldioxid
+          </div>
+          <div class="item" ng-click="sort()">
+            Land
+          </div>
+          <div class="item" ng-click="sort()">
+            Tillverkare
+          </div>
+        </div>
+    </ion-popover-view>
+  </script>
 </ion-view>
