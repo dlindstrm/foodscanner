@@ -118,22 +118,57 @@ angular.module('foodscan.services', [])
 })
 
 .factory('SearchResult', function() {
-  var result = [];
 
+   getPropByString = function (obj, propString) {
+      if (!propString)
+          return obj;
+
+      var prop, props = propString.split('.');
+
+      for (var i = 0, iLen = props.length - 1; i < iLen; i++) {
+          prop = props[i];
+
+          var candidate = obj[prop];
+          if (candidate !== undefined) {
+              obj = candidate;
+          } else {
+              break;
+          }
+      }
+      return obj[props[i]];
+  };
+
+  var original = [];
+  var result = [];
   return {
+
+    setOriginal: function(articles) {
+      original = articles;
+    },
+
+    getOriginal: function() {
+      return original;
+    },
+
+    filter: function(property, filters) {
+      result = _.filter(original, function(obj){ return filters.indexOf(getPropByString(obj, property)) !== -1; });
+    },
 
     set: function(articles) {
       result = articles;
     },
 
-    append: function(articles) {
-      for(var i = 0; i<articles.length; i++) {
-        result.push(articles[i]);
-      }
+    get: function(offset, limit) {
+      return result.slice(offset, offset+limit);
     },
 
-    get: function() {
-      return result;
+    total: function() {
+      return result.length;
+    },
+
+    reset: function() {
+      result = original;
     }
+
   }
 });

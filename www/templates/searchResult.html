@@ -4,10 +4,10 @@
   </ion-nav-buttons>
   <div class="tabs-striped tabs-top tabs-light">
     <div class="tabs">
-      <div class="tab-item" ng-click="openModal(0)">
+      <div class="tab-item" ng-click="openModal(1)">
         Kategorier
       </div>
-      <div class="tab-item" ng-click="openModal(1)">
+      <div class="tab-item" ng-click="openModal(2)">
         Filtrera
       </div>
       <div class="tab-item" ng-click="popover.show($event)">
@@ -15,7 +15,7 @@
       </div>
     </div>
   </div>
-  <ion-content padding="false" class="has-header">
+  <ion-content padding="false" class="has-header has-subheader">
    <div ng-show="articles.length > 0">
   	<ul class="list">
   		<li ng-click="result.goto({{article.dabas.GTIN}})" ng-repeat="article in articles" ng-class="article.dabas.images[0].Lank ? 'item-avatar' : ''" class="item">
@@ -24,11 +24,14 @@
         <p><strong>{{ article.dabas.producer }}</strong> {{ article.dabas.country }}</p>
   		</li>
   	</ul>
-    <button ng-click="result.loadMore()" class="button button-full" ng-hide="noResult === true">
+    <button ng-click="loadMore()" ng-hide="nextPageDisabledClass() === true" class="button button-full">
       Visa fler
-    	<i class="icon ion-loading-c" ng-show="loader === true"></i>
     </button>
-  </div>
+   </div>
+    <div ng-show="loader === true">
+      <i class="icon ion-loading-c"></i>
+    </div>
+    <p ng-show="noResult === true">Inga resultat. Vänligen försök igen.</p>
   </ion-content>
 
   <script id="categories.html" type="text/ng-template">
@@ -36,10 +39,16 @@
       <ion-header-bar>
         <div class="button button-clear" ng-click="closeModal(1)">Avbryt</div>
         <h1 class="title">Kategorier</h1>
-  	  <div class="button button-clear" ng-click="closeModal(1)">Välj</div>
+  	  <div class="button button-clear" ng-click="result.applyCategories()">Välj</div>
       </ion-header-bar>
       <ion-content>
-        Hello!
+        <div class="list">
+        <ion-checkbox ng-repeat="item in categories | orderBy:'article'"
+                      ng-model="item.checked" 
+                      ng-checked="item.checked">
+          {{ item.article }}
+        </ion-checkbox>
+        </div>
       </ion-content>
     </ion-modal-view>
   </script>
@@ -49,10 +58,37 @@
       <ion-header-bar>
         <div class="button button-clear" ng-click="closeModal(2)">Avbryt</div>
         <h1 class="title">Filtrera</h1>
-  	  <div class="button button-clear" ng-click="closeModal(2)">Välj</div>
+  	  <div class="button button-clear" ng-click="result.applyFilters()">Välj</div>
       </ion-header-bar>
       <ion-content>
-        Hello!
+        <ion-list>
+        <ion-item class="item item-icon-right" ng-show="producers.length > 0" ng-click="accordionShow('producers')">
+          Tillverkare
+          <i class="icon" ng-class="(accordion.producers == 1) ? 'ion-chevron-up' : 'ion-chevron-down'"></i>
+        </ion-item>
+        <div class="accordion-content" ng-show="accordion.producers === 1">
+         <div class="list">
+          <ion-checkbox ng-repeat="item in producers | orderBy:'name'"
+                        ng-model="item.checked" 
+                        ng-checked="item.checked">
+            {{ item.name }}
+          </ion-checkbox>
+          </div>
+        </div>
+        <ion-item class="item item-icon-right" ng-show="countries.length > 0" ng-click="accordionShow('countries')">
+          Länder
+          <i class="icon" ng-class="(accordion.countries == 1) ? 'ion-chevron-up' : 'ion-chevron-down'"></i>
+        </ion-item>
+        <div class="accordion-content" ng-show="accordion.countries === 1">
+         <div class="list">
+          <ion-checkbox ng-repeat="item in countries | orderBy:'name'"
+                        ng-model="item.checked" 
+                        ng-checked="item.checked">
+            {{ item.name }}
+          </ion-checkbox>
+         </div>
+        </div>
+        </ion-list>
       </ion-content>
     </ion-modal-view>
   </script>

@@ -24,7 +24,7 @@
     <ion-list>
         <ion-item class="item item-icon-right" ng-show="item.dabas.ingredients.length > 0" ng-click="show('ingredients')">
           Ingredienser
-          <i class="icon ion-chevron-down"></i>
+          <i class="icon" ng-class="(accordion.ingredients == 1) ? 'ion-chevron-up' : 'ion-chevron-down'"></i>
         </ion-item>
         <div class="accordion-content" ng-show="accordion.ingredients === 1">
           <div class="row" ng-repeat="ingredient in item.dabas.ingredients">
@@ -34,7 +34,7 @@
         </div>
         <ion-item class="item item-icon-right" ng-show="item.lcafd" ng-click="show('carbon')">
           Koldioxidinformation
-          <i class="icon ion-chevron-down"></i>
+          <i class="icon" ng-class="(accordion.carbon == 1) ? 'ion-chevron-up' : 'ion-chevron-down'"></i>
         </ion-item>
         <div class="accordion-content" ng-show="accordion.carbon === 1">
           <p><strong>Genomsnittligt utsläpp:</strong> {{ item.lcafd.average }} g CO<sub>2</sub> per gram</p>
@@ -44,14 +44,14 @@
         </div>
         <ion-item class="item item-icon-right" ng-show="item.dabas.labels.length > 0" ng-click="show('labels')">
           Miljömärkningar
-          <i class="icon ion-chevron-down"></i>
+          <i class="icon" ng-class="(accordion.labels == 1) ? 'ion-chevron-up' : 'ion-chevron-down'"></i>
         </ion-item>
         <div class="accordion-content" ng-show="accordion.labels === 1">
           <p>labels</p>
         </div>
         <ion-item class="item item-icon-right" ng-click="show('categories')">
           Varukategorier
-          <i class="icon ion-chevron-down"></i>
+          <i class="icon" ng-class="(accordion.categories == 1) ? 'ion-chevron-up' : 'ion-chevron-down'"></i>
         </ion-item>
         <div class="accordion-content" ng-show="accordion.categories === 1">
           <p ng-show="item.productgroup.vendingArea"><strong>Varuområde:</strong> {{ item.productgroup.vendingArea.article }}</p>
