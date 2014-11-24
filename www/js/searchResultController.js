@@ -6,8 +6,9 @@ angular.module('foodscan.searchResultController', [])
   $scope.catFilter = [];
   $scope.producerFilter = [];
   $scope.countryFilter = [];
+  $scope.sort = '';
 
-  $http.get('http://fsserver.kspri.se/api/get?search='+$scope.key)
+  $http.get('http://fsserver.kspri.se/api/get/article?search='+$scope.key)
   .success(function(data, status) {
     /// TA BORT DET HÄR FILTRET
     data = _.filter(data, function(obj) {
@@ -77,7 +78,7 @@ angular.module('foodscan.searchResultController', [])
     setArticles();
   }
 
-  this.applyCategories = function() {
+  $scope.applyCategories = function() {
     $scope.closeModal(1);
     var checked = _.filter($scope.categories, function(item) {
       return item.checked === true;
@@ -89,7 +90,7 @@ angular.module('foodscan.searchResultController', [])
     filter();
   }
 
-  this.applyFilters = function() {
+  $scope.applyFilters = function() {
     $scope.closeModal(2);
 
     /// Producer filter
@@ -113,6 +114,20 @@ angular.module('foodscan.searchResultController', [])
     filter();
   }
 
+  $scope.accordion = {
+    producers: 0,
+    countries: 0
+  };
+
+  $scope.accordionShow = function(property) {
+    if($scope.accordion[property] === 1) {
+      $scope.accordion[property] = 0;
+    }
+    else {
+      $scope.accordion[property] = 1;
+    }
+  }
+
   /**
    * Get all filter options
    */
@@ -121,7 +136,6 @@ angular.module('foodscan.searchResultController', [])
       return "vendingGroup" in obj.productgroup === true;
     });
     unique = _.uniq(unique, function(item, key, no) {
-      console.log(item);
       return item.productgroup.vendingGroup.article;
     });
     unique = _.pluck(unique, 'productgroup');
@@ -151,7 +165,6 @@ angular.module('foodscan.searchResultController', [])
       if(unique[i] !== "")
         $scope.countries.push({name: unique[i]});
     }
-    console.log($scope.countries);
   }
   
   /**
@@ -183,20 +196,6 @@ angular.module('foodscan.searchResultController', [])
     if(index == 1) $scope.oModal1.hide();
     else $scope.oModal2.hide();
   };
-
-  $scope.accordion = {
-    producers: 0,
-    countries: 0
-  };
-
-  $scope.accordionShow = function(property) {
-    if($scope.accordion[property] === 1) {
-      $scope.accordion[property] = 0;
-    }
-    else {
-      $scope.accordion[property] = 1;
-    }
-  }
   
   // Cleanup the modals when we're done with them (i.e: state change)
   // Angular will broadcast a $destroy event just before tearing down a scope 
@@ -213,4 +212,13 @@ angular.module('foodscan.searchResultController', [])
   $ionicPopover.fromTemplateUrl('templates/sort.html', function(popover) {
     $scope.popover = popover;
   });
+
+  /**
+   * Sort
+   */
+  
+  $scope.applySort = function(property) {
+    console.log("hej");
+    $scope.sort = property;
+  };
 });

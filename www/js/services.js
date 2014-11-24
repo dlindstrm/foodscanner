@@ -2,69 +2,8 @@ angular.module('foodscan.services', [])
 
 .factory('Articles', function($http, $location, $ionicLoading, _) {
   
-  var url = "http://fsserver.kspri.se/api/get";
-  var articles = [
-    {
-      dabas: {
-          GTIN: "07310867002394",
-          name: "A-fil",
-          producer: "SKÅNEMEJERIER",
-          country: "Sverige",
-          weight: 1050,
-          productcode: "300310204598",
-          images: [
-              {
-                  Filformat: "jpg",
-                  Filnamn: "7310867002394_v",
-                  Informationstyp: "PRODUCT_IMAGE",
-                  Innehallsbeskrivning: "",
-                  Lank: "http://www.dabas.com/media/skanemejerier-storhushall/7310867002394_v.jpg"
-              }
-          ],
-          ingredients:[{"name":"Kebabkött"},{"name":"Goudaost"},{"name":"Vetemjöl","carbon":22}],
-          labels:[{"Typ":"Nyckelhålet","Typkod":"NYCKELHAL_MARK"}]
-      },
-      productgroup: {
-          vendingArea: {
-              article: "Färskvaror/Kylvaror",
-              no: 3
-          },
-          majorGroup: {
-              article: "Mejerivaror",
-              no: 3,
-              parent: 3
-          },
-          vendingGroup: {
-              article: "Filprodukter",
-              no: 1020,
-              parent: 3
-          },
-          vendingUnderGroup: {
-              article: "Filmjölk 3 %",
-              no: 4598,
-              parent: 1020
-          }
-      },
-      lcafd: {
-          id: 239,
-          name: "A-fil",
-          gramPerPiece: 250,
-          gramPerDeciliter: 103,
-          carbon: {
-              average: 0,
-              max: 0,
-              min: 0
-          },
-          energy: {
-              average: 0,
-              max: 0,
-              min: 0
-          },
-          category: 8
-      },
-      carbon: 200
-  }
-  ];
+  var url = "http://fsserver.kspri.se/api/get/article";
+  var articles = [];
   
   return {
 
@@ -119,25 +58,6 @@ angular.module('foodscan.services', [])
 
 .factory('SearchResult', function() {
 
-   getPropByString = function (obj, propString) {
-      if (!propString)
-          return obj;
-
-      var prop, props = propString.split('.');
-
-      for (var i = 0, iLen = props.length - 1; i < iLen; i++) {
-          prop = props[i];
-
-          var candidate = obj[prop];
-          if (candidate !== undefined) {
-              obj = candidate;
-          } else {
-              break;
-          }
-      }
-      return obj[props[i]];
-  };
-
   var original = [];
   var result = [];
   return {
@@ -148,10 +68,6 @@ angular.module('foodscan.services', [])
 
     getOriginal: function() {
       return original;
-    },
-
-    filter: function(property, filters) {
-      result = _.filter(original, function(obj){ return filters.indexOf(getPropByString(obj, property)) !== -1; });
     },
 
     set: function(articles) {

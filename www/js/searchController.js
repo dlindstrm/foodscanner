@@ -5,11 +5,6 @@ angular.module('foodscan.searchController', [])
   $scope.showPrevious = true;
   $scope.previousSearches = JSON.parse(window.localStorage.getItem('previous_searches'));
 
-  if($stateParams.key) {
-    setInput($stateParams.key);
-    $scope.articles = SearchResult.get().slice(0, 10);
-  }
-
   this.change = function() {
     search(this.searchInput.toString());
   }
@@ -36,7 +31,7 @@ angular.module('foodscan.searchController', [])
 
   getArticles = function() {
     $scope.loader = true;
-    $http.get('http://fsserver.kspri.se/api/get?search='+$scope.input+"&limit=10")
+    $http.get('http://fsserver.kspri.se/api/get/article?search='+$scope.input+"&limit=10")
     .success(function(data, status) {
       $scope.loader = false;
       if(data.length < 1) {
