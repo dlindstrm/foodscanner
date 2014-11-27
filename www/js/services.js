@@ -56,10 +56,11 @@ angular.module('foodscan.services', [])
 
 })
 
-.factory('SearchResult', function() {
+.factory('ArticleList', function($http, $location, $ionicLoading, _) {
 
-  var original = [];
+  var original = JSON.parse(window.localStorage.getItem('original')) || [];
   var result = [];
+
   return {
 
     setOriginal: function(articles) {
@@ -84,7 +85,30 @@ angular.module('foodscan.services', [])
 
     reset: function() {
       result = original;
-    }
+    },
 
+    goTo: function(url) {
+      $ionicLoading.show();
+      $http.get(url)
+      .success(function(data, status) {
+        /// TA BORT DET HÄR FILTRET
+        data = _.filter(data, function(obj) {
+          return obj.dabas.productcode !== null;
+        })
+        data = _.filter(data, function(obj) {
+          return obj.dabas.productcode.length > 1;
+        })
+
+        
+        original = data;
+        window.localStorage.setItem('original', JSON.stringify(original));
+        $location.path("app/articlelist");
+        $ionicLoading.hide();
+      })
+      .error(function(data, status) {
+        $ionicLoading.hide();
+        $ionicNavBarDelegate.back();
+      })
+    }
   }
 });
