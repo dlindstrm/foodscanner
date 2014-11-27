@@ -1,0 +1,30 @@
+<ion-view title="Foodscanner" ng-controller="BrowseController as browse">
+  <ion-content class="has-header" scroll="false">    
+  	<div class="list">
+
+	  <label class="item item-input item-select">
+	    <div class="input-label">
+	      Varuområde
+	    </div>
+	    <select ng-model="lvl1" ng-change="setLvl(lvl1.no)" ng-options="cat as cat.article for cat in levelOne">
+	    	<option value="">-- Välj varuområde --</option>
+	    </select>
+	  </label>
+
+	  <label class="item item-input item-select">
+	    <div class="input-label">
+	      Huvudgrupp
+	    </div>
+	    <select ng-model="lvl2" ng-change="setLvl(lvl1.no, lvl2.no)" ng-options="cat as cat.article for cat in levelTwo"></select>
+	  </label>
+
+	  <label class="item item-input item-select">
+	    <div class="input-label">
+	      Varugrupp
+	    </div>
+	    <select ng-model="lvl3" ng-options="cat as cat.article for cat in levelThree"></select>
+	  </label>
+	</div>
+	<button ng-click="show(lvl1.no, lvl2.no, lvl3.no)" class="button button-block button-positive">Visa kategori</button>
+  </ion-content>
+</ion-view>
