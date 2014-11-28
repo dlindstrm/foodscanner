@@ -1,6 +1,6 @@
 angular.module('foodscan.searchController', [])
 
-.controller("SearchController", function($scope, $http, $stateParams, $location, $timeout, $ionicNavBarDelegate, _, Articles, SearchResult) {
+.controller("SearchController", function($scope, $http, $stateParams, $location, $timeout, $ionicNavBarDelegate, _, Articles, ArticleList) {
   
   $scope.showPrevious = true;
   $scope.previousSearches = JSON.parse(window.localStorage.getItem('previous_searches'));
@@ -39,7 +39,6 @@ angular.module('foodscan.searchController', [])
         return;
       }
       $scope.articles = data;
-      SearchResult.set($scope.articles);
 
       var previous = JSON.parse(window.localStorage.getItem('previous_searches'));
       if(previous) {
@@ -67,7 +66,7 @@ angular.module('foodscan.searchController', [])
   }
 
   this.showAll = function() {
-    $location.path('/app/result/'+$scope.input)
+    ArticleList.goTo('http://fsserver.kspri.se/api/get/article?search='+$scope.input);
   }
 
   this.setInput = function(key) {
