@@ -3,7 +3,10 @@
     <button menu-toggle="right" class="button button-icon icon ion-navicon"></button>
   </ion-nav-buttons>
   <ion-content ng-controller="ArticleController as article" padding="true" class="has-header">
-    <h1>{{ item.dabas.name }}</h1>
+    <div class="row">    
+      <div class="col col-90"><h1>{{ item.dabas.name }}</h1></div>
+      <div class="col"><i class="icon" ng-click="toggleFav(item.dabas.GTIN, item.dabas.name, item.dabas.producer, item.dabas.country, item.dabas.images[0].Lank)" ng-class="(favorite == true) ? 'ion-ios7-star' : 'ion-ios7-star-outline'"></i></div>  
+    </div>
     <div class="row">
       <div class="col" ng-show="item.dabas.images[0].Lank"><img style="max-width:100%;max-height:200px" ng-src="{{item.dabas.images[0].Lank}}" /></div>
       <div class="col">
