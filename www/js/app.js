@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('foodscan', ['ionic', 'ngCordova', 'underscore', 'ui.unique', 'foodscan.startController', 'foodscan.scanController', 'foodscan.articleController', 'foodscan.searchController', 'foodscan.browseController', 'foodscan.articleListController', 'foodscan.services'])
+angular.module('foodscan', ['ionic', 'ngCordova', 'underscore', 'ui.unique', 'foodscan.startController', 'foodscan.scanController', 'foodscan.articleController', 'foodscan.searchController', 'foodscan.browseController', 'foodscan.favoriteController', 'foodscan.articleListController', 'foodscan.services'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -61,6 +61,15 @@ angular.module('foodscan', ['ionic', 'ngCordova', 'underscore', 'ui.unique', 'fo
       views: {
         'menuContent' :{
           templateUrl: "templates/articlelist.html"
+        }
+      }
+    })
+
+    .state('app.favorites', {
+      url: "/favorites",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/favorites.html"
         }
       }
     })

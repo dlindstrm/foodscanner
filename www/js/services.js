@@ -111,4 +111,50 @@ angular.module('foodscan.services', [])
       })
     }
   }
+})
+
+.factory('Favorite', function() {
+
+  return {
+    toggleFavorite: function(id, title, producer, country, img) {
+      if(localStorage["favorites"] == null) {
+        var favorites = [];
+        favorites.push({id: id, title: title, producer: producer, country: country, img: img});
+        localStorage["favorites"] = JSON.stringify(favorites);
+        return true;
+      }
+      else {
+        var storedFavs = JSON.parse(localStorage["favorites"]);
+        var article = _.find(storedFavs, function(obj) {return obj.id == id})
+        if(article) {
+          storedFavs = _.reject(storedFavs, function(obj) {return obj.id == id})
+          localStorage["favorites"] = JSON.stringify(storedFavs);
+          return false;
+        }
+        else {
+          var storedFavs = JSON.parse(localStorage["favorites"]);
+          storedFavs.push({id: id, title: title, producer: producer, country: country, img: img});
+          localStorage["favorites"] = JSON.stringify(storedFavs);
+          return true;
+        }
+      }
+    },
+    isFavorite: function(id) {
+       if(localStorage["favorites"] == null) {
+        return false;
+      }
+      else {
+        var storedFavs = JSON.parse(localStorage["favorites"]);
+        var article = _.find(storedFavs, function(obj) {return obj.id == id})
+        if(article) {
+          return true;
+        }
+        else {
+          return false;
+        }
+      }
+
+    }
+  
+}
 });

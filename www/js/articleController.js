@@ -1,7 +1,7 @@
 angular.module('foodscan.articleController', [])
 
 
-.controller("ArticleController", function($stateParams, $scope, $ionicLoading, $ionicNavBarDelegate, Articles) {
+.controller("ArticleController", function($stateParams, $scope, $ionicLoading, $ionicNavBarDelegate, Articles, Favorite) {
   Articles.getArticle($stateParams.gtin, function(error, data) {
     if(error !== null) {
       $ionicNavBarDelegate.back();
@@ -25,5 +25,9 @@ angular.module('foodscan.articleController', [])
     else {
       $scope.accordion[property] = 1;
     }
+  }
+  $scope.favorite = Favorite.isFavorite($stateParams.gtin);
+  $scope.toggleFav = function(id, title, producer, country, img) {
+    $scope.favorite = Favorite.toggleFavorite(id, title, producer, country, img);
   }
 })
