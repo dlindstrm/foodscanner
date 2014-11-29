@@ -5,33 +5,9 @@ angular.module('foodscan.articleListController', [])
   $scope.producerFilter = [];
   $scope.countryFilter = [];
   $scope.sort = '';
+
   ArticleList.set(ArticleList.getOriginal());
-
-  /*$http.get('http://fsserver.kspri.se/api/get/article?search='+$scope.key)
-  .success(function(data, status) {
-    /// TA BORT DET HÄR FILTRET
-    data = _.filter(data, function(obj) {
-      return obj.dabas.productcode !== null;
-    })
-    data = _.filter(data, function(obj) {
-      return obj.dabas.productcode.length > 1;
-    })
-
-
-    $scope.loader = false;
-    SearchResult.setOriginal(data);
-    SearchResult.set(data);
-    setArticles();
-    
-    getCategories(data);
-    getProducers(data);
-    getCountries(data);
-  })
-  .error(function(data, status) {
-    $scope.loader = false;
-    $scope.noResult = true;
-    $scope.nextPageDisabledClass();
-  });*/
+  $scope.articles = ArticleList.get($scope.currentPage*$scope.itemsPerPage, $scope.itemsPerPage);
 
   setArticles = function() {
     $scope.itemsPerPage = 20;
@@ -39,6 +15,7 @@ angular.module('foodscan.articleListController', [])
     $scope.total = ArticleList.total();
     $scope.articles = ArticleList.get($scope.currentPage*$scope.itemsPerPage, $scope.itemsPerPage);
     $scope.noResult = ($scope.articles.length < 1) ? true : false;
+    console.log($scope.articles)
   }
 
   $scope.loadMore = function() {
@@ -134,13 +111,13 @@ angular.module('foodscan.articleListController', [])
   getCategories = function() {
     var data = ArticleList.getOriginal();
     var unique = _.filter(data, function(obj) {
-      return "vendingGroup" in obj.productgroup === true;
+      return "majorGroup" in obj.productgroup === true;
     });
     unique = _.uniq(unique, function(item, key, no) {
-      return item.productgroup.vendingGroup.article;
+      return item.productgroup.majorGroup.article;
     });
     unique = _.pluck(unique, 'productgroup');
-    $scope.categories = _.pluck(unique, 'vendingGroup');
+    $scope.categories = _.pluck(unique, 'majorGroup');
   }
 
   getProducers = function() {
@@ -169,6 +146,14 @@ angular.module('foodscan.articleListController', [])
         $scope.countries.push({name: unique[i]});
     }
   }
+
+  init = function() {
+    setArticles();  
+    getCategories();
+    getProducers();
+    getCountries();
+  }
+  init();
 
   
   /**
@@ -225,12 +210,4 @@ angular.module('foodscan.articleListController', [])
     console.log("hej");
     $scope.sort = property;
   };
-
-  init = function() {
-    setArticles();  
-    getCategories();
-    getProducers();
-    getCountries();
-  }
-  $timeout(init, 200);
 });

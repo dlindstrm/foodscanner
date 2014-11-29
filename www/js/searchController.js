@@ -2,7 +2,7 @@ angular.module('foodscan.searchController', [])
 
 .controller("SearchController", function($scope, $http, $stateParams, $location, $timeout, $ionicNavBarDelegate, _, Articles, ArticleList) {
   
-  $scope.showPrevious = true;
+  $scope.noArticles = true;
   $scope.previousSearches = JSON.parse(window.localStorage.getItem('previous_searches'));
 
   this.change = function() {
@@ -19,12 +19,12 @@ angular.module('foodscan.searchController', [])
     $scope.input = key;
     if($scope.input.length > 0) {
       $scope.loader = true;
-      $scope.showPrevious = false;
+      $scope.noArticles = false;
       $scope.inputChangedPromise = $timeout(getArticles,1000);
     }
     else {
       $scope.loader = false;
-      $scope.showPrevious = true;
+      $scope.noArticles = true;
       $scope.previousSearches = JSON.parse(window.localStorage.getItem('previous_searches'));
     }
   }
@@ -62,7 +62,7 @@ angular.module('foodscan.searchController', [])
   }
 
   this.cancel = function() {
-    $ionicNavBarDelegate.back();
+    $location.path('app/start');
   }
 
   this.showAll = function() {
@@ -75,7 +75,6 @@ angular.module('foodscan.searchController', [])
   }
 
   this.clearPrevious = function() {
-    $scope.showPrevious = false;
     $scope.previousSearches = [];
     window.localStorage.removeItem("previous_searches");
   }

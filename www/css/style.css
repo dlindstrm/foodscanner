@@ -1,1 +1,55 @@
 /* Empty. Add your own CSS if you like */
+
+/**
+ * Header
+ */
+.bar {
+	color: #d2704b;
+	border:0;
+}
+.bar.bar-light .title {
+	color: #d2704b;
+}
+
+/**
+ * Start
+ */
+.button.start-item {
+	height: 25%;
+	margin: 0;
+	font-weight: 700;
+	font-size: 24px;
+	border: 0;
+}
+.button.start-item i {
+	margin-right: 10px;
+}
+
+/**
+ * Search
+ */
+.item-input-wrapper {
+	background: #fff;
+}
+.bar-search input,
+.bar-search button {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.item.clear-history {
+	color: #d2704b;
+}
+.search-info i {
+	font-size: 150px;
+	color: #000;
+}
+/**
+ * Utility
+ */
+.center {
+	text-align: center;
+}
+.item-no-margin,
+.button.item-no-margin {
+	padding: 0;
+	margin: 0;
+}

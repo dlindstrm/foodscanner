@@ -1,23 +1,60 @@
-/*
-To customize the look and feel of Ionic, you can override the variables
-in ionic's _variables.scss file.
+/*@font-face {
+    font-family: 'Abel';
+    src: url('../fonts/Abel-Regular/abel-regular.eot');
+    src: url('../fonts/Abel-Regular/abel-regular.eot') format('embedded-opentype'),
+         url('../fonts/Abel-Regular/abel-regular.woff2') format('woff2'),
+         url('../fonts/Abel-Regular/abel-regular.woff') format('woff'),
+         url('../fonts/Abel-Regular/abel-regular.ttf') format('truetype'),
+         url('../fonts/Abel-Regular/abel-regular.svg#AbelRegular') format('svg');
+    font-weight: normal;
+}
+@font-face {
+    font-family: 'Dosis';
+    src: url('../fonts/Dosis-Regular/dosis-regular.eot');
+    src: url('../fonts/Dosis-Regular/dosis-regular.eot') format('embedded-opentype'),
+         url('../fonts/Dosis-Regular/dosis-regular.woff2') format('woff2'),
+         url('../fonts/Dosis-Regular/dosis-regular.woff') format('woff'),
+         url('../fonts/Dosis-Regular/dosis-regular.ttf') format('truetype'),
+         url('../fonts/Dosis-Regular/dosis-regular.svg#DosisRegular') format('svg');
+    font-weight: normal;
+}
+@font-face {
+    font-family: 'Dosis';
+    src: url('../fonts/Dosis-SemiBold/dosis-semibold.eot');
+    src: url('../fonts/Dosis-SemiBold/dosis-semibold.eot') format('embedded-opentype'),
+         url('../fonts/Dosis-SemiBold/dosis-semibold.woff2') format('woff2'),
+         url('../fonts/Dosis-SemiBold/dosis-semibold.woff') format('woff'),
+         url('../fonts/Dosis-SemiBold/dosis-semibold.ttf') format('truetype'),
+         url('../fonts/Dosis-SemiBold/dosis-semibold.svg#DosisSemiBold') format('svg');
+    font-weight: normal;
+}
+@font-face {
+    font-family: 'Dosis';
+    src: url('../fonts/Dosis-Light/dosis-light.eot');
+    src: url('../fonts/Dosis-Light/dosis-light.eot') format('embedded-opentype'),
+         url('../fonts/Dosis-Light/dosis-light.woff2') format('woff2'),
+         url('../fonts/Dosis-Light/dosis-light.woff') format('woff'),
+         url('../fonts/Dosis-Light/dosis-light.ttf') format('truetype'),
+         url('../fonts/Dosis-Light/dosis-light.svg#DosisLight') format('svg');
+    font-weight: 300;
+}*/
 
-For example, you might change some of the default colors:
 
 $light:                           #fff !default;
-$stable:                          #f8f8f8 !default;
-$positive:                        #4a87ee !default;
-$calm:                            #43cee6 !default;
-$balanced:                        #66cc33 !default;
-$energized:                       #f0b840 !default;
-$assertive:                       #ef4e3a !default;
-$royal:                           #8a6de9 !default;
-$dark:                            #444 !default;
-*/
+$stable:                          #fff !default;
+$positive:                        #d2704b !default;
+$calm:                            #f6cd64 !default;
+$balanced:                        #f1ac53 !default;
+$energized:                       #d64741 !default;
+$assertive:                       #bbe3e5 !default;
+$dark:                            #555 !default;
+
+$base-background-color:           #bbe3e5 !default;
+
+$font-family-sans-serif:          "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
 
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
-

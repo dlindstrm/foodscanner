@@ -1,5 +1,5 @@
 <ion-view hide-nav-bar="true" ng-controller="SearchController as search">
-<ion-header-bar class="bar bar-header item-input-inset">
+<ion-header-bar class="bar bar-calm bar-header item-input-inset bar-search">
  	<label class="item-input-wrapper">
     	<i class="icon ion-ios7-search placeholder-icon"></i>
     	<input ng-model="search.searchInput" ng-change="search.change()" type="search" placeholder="Sök artikel">
@@ -10,30 +10,38 @@
 </ion-header-bar>
 <ion-content>
   <div ng-show="articles.length > 0">
-  	<ul class="list">
-  		<li ng-click="search.goto({{article.dabas.GTIN}})" ng-repeat="article in articles" ng-class="article.dabas.images[0].Lank ? 'item-avatar' : ''" class="item">
+  	<ul class="list item-no-margin">
+  		<li ng-click="search.goto({{article.dabas.GTIN}})" ng-repeat="article in articles" ng-class="article.dabas.images[0].Lank ? 'item-avatar' : ''" class="item item-light">
         <img ng-show="article.dabas.images[0].Lank" ng-src="{{article.dabas.images[0].Lank}}"/>
   			<h2>{{ article.dabas.name }}</h2>
         <p><strong>{{ article.dabas.producer }}</strong> {{ article.dabas.country }}</p>
   		</li>
   	</ul>
-    <button ng-click="search.showAll()" class="button button-full">
+    <button ng-click="search.showAll()" class="button button-full button-positive item-no-margin">
       Visa alla resultat
     </button>
   </div>
-  <div ng-show="showPrevious === true && previousSearches.length > 0">
-    <h3>Tidigare sökningar</h3>
+  <div ng-show="noArticles === true && previousSearches.length > 0">
     <ul class="list">
-      <li ng-repeat="key in previousSearches" ng-click="search.setInput(key)" class="item">
+      <li class="item item-light item-divider item-icon-right">
+        Tidigare sökningar
+        <i class="icon ion-chevron-down"></i>
+      </li>
+      <li ng-repeat="key in previousSearches" ng-click="search.setInput(key)" class="item item-light">
         {{ key }}
       </li>
-      <li class="item" ng-click="search.clearPrevious()">
+      <li class="item item-light clear-history" ng-click="search.clearPrevious()">
         Rensa historik
       </li>
     </ul>
   </div>
+  <div class="center search-info padding-top" ng-show="noArticles === true && (previousSearches === null || previousSearches.length < 1)">
+  <i class="icon ion-search placeholder-icon"></i>
+  <h3>Sök</h3>
+  <p>Sök efter artiklar du vill veta koldioxidutsläppet om.</p>
+  </div>
   <p ng-show="noResult === true">Inga resultat. Vänligen försök igen.</p>
-  <div ng-show="loader === true">
+  <div class="center padding-top" ng-show="loader === true">
     <i class="icon ion-loading-c"></i>
   </div>
 </ion-content>
