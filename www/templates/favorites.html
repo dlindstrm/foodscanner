@@ -1,5 +1,21 @@
-<ion-view title="Foodscanner" ng-controller="FavoriteController as favorite">
-  <ion-content class="has-header" scroll="false">    
-	{{ favs }}	
+<ion-view title="Favoriter" ng-controller="FavoriteController as favorite">
+  <ion-nav-buttons side="right">
+    <button menu-toggle="right" class="button button-icon icon ion-more"></button>
+  </ion-nav-buttons>
+  <ion-content class="has-header">
+   <div ng-show="favs.length > 0">
+  	<ion-list>
+  		<ion-item ng-click="favorite.goto({{fav.id}})" ng-repeat="fav in favs" ng-class="fav.img ? 'item-avatar' : ''" class="item">
+	        <img ng-show="fav.img" ng-src="{{fav.img}}"/>
+	  			<h2>{{ fav.title }}</h2>
+	        <p><strong>{{ fav.producer }}</strong> {{ fav.country }}</p>
+	        <ion-option-button class="button-assertive" ng-click="toggleFav({{fav.id}})"><span>Ta bort</span></ion-option-button>
+  		</ion-item>
+  	</<ion-list>
+   </div>
+   <div ng-show="favs.length < 1">
+   	<p class="center padding-top">Du har inte lagt till några favoriter.</p>
+   </div>
+    
   </ion-content>
 </ion-view>

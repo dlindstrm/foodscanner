@@ -169,3 +169,24 @@ img {
 .no-border {
 	border:0 !important;
 }
+
+/**
+Browse
+*/
+label.disabled .input-label {
+	color: #ccc !important;
+}
+label.disabled {
+	pointer-events: none;
+}
+
+label.disabled>select {
+	color: #ccc !important;
+}
+
+/**
+Favorites
+*/
+ion-option-button span {
+	line-height: 75px;
+}

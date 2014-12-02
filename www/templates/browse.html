@@ -1,30 +1,39 @@
-<ion-view title="Foodscanner" ng-controller="BrowseController as browse">
+<ion-view title="Bläddra" ng-controller="BrowseController as browse">
+  <ion-nav-buttons side="right">
+    <button menu-toggle="right" class="button button-icon icon ion-more"></button>
+  </ion-nav-buttons>
   <ion-content class="has-header" scroll="false">    
   	<div class="list">
+  	<form>
 
 	  <label class="item item-input item-select">
 	    <div class="input-label">
-	      Varuområde
+	      Nivå 1
 	    </div>
 	    <select ng-model="lvl1" ng-change="setLvl(lvl1.no)" ng-options="cat as cat.article for cat in levelOne">
 	    	<option value="">Välj varuområde</option>
 	    </select>
 	  </label>
 
-	  <label ng-class="lvl1.no == undefined ? 'disabled' : ''" class="item item-input item-select">
+	  <label ng-class="selected1 == false ? 'disabled' : ''" class="item item-input item-select">
 	    <div class="input-label">
-	      Huvudgrupp
+	      Nivå 2
 	    </div>
-	    <select ng-model="lvl2" ng-change="setLvl(lvl1.no, lvl2.no)" ng-options="cat as cat.article for cat in levelTwo"></select>
+	    <select ng-model="lvl2" ng-change="setLvl(lvl1.no, lvl2.no)" ng-options="cat as cat.article for cat in levelTwo">
+	    	<option value="">Välj huvudgrupp</option>
+	    </select>
 	  </label>
 
-	  <label ng-class="lvl2.no == undefined ? 'disabled' : ''" class="item item-input item-select">
+	  <label ng-class="selected2 == false ? 'disabled' : ''" class="item item-input item-select">
 	    <div class="input-label">
-	      Varugrupp
+	      Nivå 3
 	    </div>
-	    <select ng-model="lvl3" ng-options="cat as cat.article for cat in levelThree"></select>
+	    <select ng-model="lvl3" ng-options="cat as cat.article for cat in levelThree">
+	    	<option value="">Välj varugrupp</option>
+	    </select>
 	  </label>
 	<button ng-click="show(lvl1.no, lvl2.no, lvl3.no)" class="button button-block button-positive">Visa produkter</button>
+	</form>
 	</div>
 	
   </ion-content>
