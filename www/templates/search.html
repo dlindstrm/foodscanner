@@ -1,5 +1,5 @@
 <ion-view hide-nav-bar="true" ng-controller="SearchController as search">
-<ion-header-bar class="bar bar-calm bar-header item-input-inset bar-search">
+<ion-header-bar class="bar bar-dark bar-header item-input-inset bar-search" animation="no-animation">
  	<label class="item-input-wrapper">
     	<i class="icon ion-ios7-search placeholder-icon"></i>
     	<input ng-model="search.searchInput" ng-change="search.change()" type="search" placeholder="Sök artikel">
@@ -17,7 +17,7 @@
         <p><strong>{{ article.dabas.producer }}</strong> {{ article.dabas.country }}</p>
   		</li>
   	</ul>
-    <button ng-click="search.showAll()" class="button button-full button-positive item-no-margin">
+    <button ng-click="search.showAll()" class="button button-full button-calm item-no-margin">
       Visa alla resultat
     </button>
   </div>
@@ -25,7 +25,7 @@
     <ul class="list">
       <li class="item item-light item-divider item-icon-right">
         Tidigare sökningar
-        <i class="icon ion-chevron-down"></i>
+        <i class="icon ion-ios7-arrow-down"></i>
       </li>
       <li ng-repeat="key in previousSearches" ng-click="search.setInput(key)" class="item item-light">
         {{ key }}
@@ -40,7 +40,7 @@
   <h3>Sök</h3>
   <p>Sök efter artiklar du vill veta koldioxidutsläppet om.</p>
   </div>
-  <p ng-show="noResult === true">Inga resultat. Vänligen försök igen.</p>
+  <p class="center padding-top" ng-show="noResult === true">Inga resultat. Vänligen försök igen.</p>
   <div class="center padding-top" ng-show="loader === true">
     <i class="icon ion-loading-c"></i>
   </div>

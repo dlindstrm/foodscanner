@@ -5,9 +5,7 @@ angular.module('foodscan.articleListController', [])
   $scope.producerFilter = [];
   $scope.countryFilter = [];
   $scope.sort = '';
-
   ArticleList.set(ArticleList.getOriginal());
-  $scope.articles = ArticleList.get($scope.currentPage*$scope.itemsPerPage, $scope.itemsPerPage);
 
   setArticles = function() {
     $scope.itemsPerPage = 20;
@@ -15,7 +13,6 @@ angular.module('foodscan.articleListController', [])
     $scope.total = ArticleList.total();
     $scope.articles = ArticleList.get($scope.currentPage*$scope.itemsPerPage, $scope.itemsPerPage);
     $scope.noResult = ($scope.articles.length < 1) ? true : false;
-    console.log($scope.articles)
   }
 
   $scope.loadMore = function() {
@@ -42,14 +39,33 @@ angular.module('foodscan.articleListController', [])
   
   filter = function() {
     var articles = ArticleList.getOriginal();
+    if($scope.sortProperty !== '') {
+      $scope.sortActive = true;
+      articles = _.sortBy(articles, function(obj){ return obj.dabas[$scope.sortProperty]; });
+    }
+    else {
+      $scope.sortActive = false;
+    }
     if($scope.catFilter.length !== 0) {
-      articles = _.filter(articles, function(obj){ return $scope.catFilter.indexOf(obj.productgroup.vendingGroup.article) !== -1; });
+      $scope.catActive = true;
+      articles = _.filter(articles, function(obj){ return $scope.catFilter.indexOf(obj.productgroup.majorGroup.article) !== -1; });
+    }
+    else {
+      $scope.catActive = false;
     }
     if($scope.producerFilter.length !== 0) {
+      $scope.producerActive = true;
       articles = _.filter(articles, function(obj){ return $scope.producerFilter.indexOf(obj.dabas.producer) !== -1; });
     }
+    else {
+      $scope.producerActive = false;
+    }
     if($scope.countryFilter.length !== 0) {
+      $scope.countryActive = true;
       articles = _.filter(articles, function(obj){ return $scope.countryFilter.indexOf(obj.dabas.country) !== -1; });
+    }
+    else {
+      $scope.countryActive = false;
     }
     ArticleList.set(articles);
     setArticles();
@@ -148,12 +164,12 @@ angular.module('foodscan.articleListController', [])
   }
 
   init = function() {
-    setArticles();  
+    setArticles();
     getCategories();
     getProducers();
     getCountries();
   }
-  init();
+  $timeout(init);
 
   
   /**
@@ -198,16 +214,29 @@ angular.module('foodscan.articleListController', [])
    * Popover for sorting
    */
   
-  $ionicPopover.fromTemplateUrl('templates/sort.html', function(popover) {
+  $ionicPopover.fromTemplateUrl('sort.html', { scope: $scope }).then(function(popover) {
     $scope.popover = popover;
+  });
+
+  $scope.openPopover = function($event) {
+    $scope.popover.show($event);
+  };
+  $scope.closePopover = function() {
+    $scope.popover.hide();
+  };
+  //Cleanup the popover when we're done with it!
+  $scope.$on('$destroy', function() {
+    $scope.popover.remove();
   });
 
   /**
    * Sort
    */
-  
-  $scope.applySort = function(property) {
-    console.log("hej");
-    $scope.sort = property;
+    
+  $scope.applySort = function(property, name) {
+    $scope.sortProperty = (property == $scope.sortProperty) ? '' : property;
+    $scope.sortName = (name == $scope.sortName) ? '' : name;
+    filter();
+    $scope.closePopover();
   };
 });

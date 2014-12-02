@@ -1,22 +1,22 @@
 <ion-view title="Foodscanner" ng-controller="StartController as start" hide-back-button="true">
 
-  <ion-content class="has-header" scroll="false">    
+  <ion-content class="has-header start">    
 
-  	<button class="button button-large button-full button-assertive start-item scan" ng-controller="ScanController as scan" ng-click="scanBarcode()">
-      <i class="icon ion-ios7-barcode"></i>
-      Skanna
+    <button class="button button-large button-full button-stable border-bottom start-item scan" ng-controller="ScanController as scan" ng-click="scanBarcode()">
+      <div><i class="icon ion-ios7-barcode-outline"></i></div>
+      <div>Skanna</div>
     </button>
-    <button ng-click="go('/app/search')" class="button button-large button-full button-calm start-item search">
-      <i class="icon ion-search"></i>
-      Sök
+    <button ng-click="go('/app/search')" class="button button-large border-bottom button-full button-stable start-item search">
+      <div><i class="icon ion-ios7-search"></i></div>
+      <div>Sök</div>
      </button>
-    <button ng-click="go('/app/browse')" class="button button-large button-full button-balanced start-item browse">
-      <i class="icon ion-ios7-albums"></i>
-      Bläddra
+    <button ng-click="go('/app/browse')" class="button button-large button-full border-bottom button-stable start-item browse">
+      <div><i class="icon ion-ios7-albums-outline"></i></div>
+      <div>Bläddra</div>
     </button>
-    <button ng-click="go('/app/favorites')" class="button button-large button-full button-positive start-item favorites">
-      <i class="icon ion-ios7-star"></i>
-      Favoriter
+    <button ng-click="go('/app/favorites')" class="button button-large button-full button-stable start-item favorites">
+      <div><i class="icon ion-ios7-star-outline"></i></div>
+      <div>Favoriter</div>
     </button>
   </ion-content>
 </ion-view>

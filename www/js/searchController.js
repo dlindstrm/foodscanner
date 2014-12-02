@@ -1,10 +1,9 @@
 angular.module('foodscan.searchController', [])
 
-.controller("SearchController", function($scope, $http, $stateParams, $location, $timeout, $ionicNavBarDelegate, _, Articles, ArticleList) {
+.controller("SearchController", function($scope, $http, $stateParams, $location, $timeout, $ionicNavBarDelegate, $ionicPopup, _, Articles, ArticleList) {
   
   $scope.noArticles = true;
   $scope.previousSearches = JSON.parse(window.localStorage.getItem('previous_searches'));
-
   this.change = function() {
     search(this.searchInput.toString());
   }
@@ -31,6 +30,7 @@ angular.module('foodscan.searchController', [])
 
   getArticles = function() {
     $scope.loader = true;
+    window.localStorage.setItem('recent', $scope.input);
     $http.get('http://fsserver.kspri.se/api/get/article?search='+$scope.input+"&limit=10")
     .success(function(data, status) {
       $scope.loader = false;
@@ -39,7 +39,7 @@ angular.module('foodscan.searchController', [])
         return;
       }
       $scope.articles = data;
-
+      window.localStorage.setItem('recent_articles', JSON.stringify($scope.articles));
       var previous = JSON.parse(window.localStorage.getItem('previous_searches'));
       if(previous) {
         if(!_.find(previous, function(key){ return key === $scope.input}))
@@ -66,7 +66,7 @@ angular.module('foodscan.searchController', [])
   }
 
   this.showAll = function() {
-    ArticleList.goTo('http://fsserver.kspri.se/api/get/article?search='+$scope.input);
+    ArticleList.goTo('http://fsserver.kspri.se/api/get/article?search='+this.searchInput);
   }
 
   this.setInput = function(key) {
@@ -75,7 +75,34 @@ angular.module('foodscan.searchController', [])
   }
 
   this.clearPrevious = function() {
-    $scope.previousSearches = [];
-    window.localStorage.removeItem("previous_searches");
+   var confirmPopup = $ionicPopup.confirm({
+     title: 'Radera sökhistorik',
+     template: 'Är du säker på att du vill radera din sökhistorik?',
+     scope: $scope,
+     buttons: [
+      {
+        text: 'Avbryt',
+        type: 'button-calm no-border',
+      }, 
+      {
+        text: 'Ta bort',
+        type: 'button-assertive no-border',
+        onTap: function(e) {
+          $scope.previousSearches = [];
+          window.localStorage.removeItem("previous_searches");
+        }
+      }
+    ]
+   });
+  };
+
+  $scope.recent = window.localStorage.getItem('recent');
+  if($scope.recent) {
+    this.searchInput = $scope.recent;
+  }
+  $scope.recentArticles = JSON.parse(window.localStorage.getItem('recent_articles'));
+  if($scope.recentArticles) {
+    $scope.articles = $scope.recentArticles;
+    $scope.noArticles = false;
   }
 });

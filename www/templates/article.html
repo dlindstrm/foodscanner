@@ -1,27 +1,32 @@
 <ion-view title="Produkt">
   <ion-nav-buttons side="right">
-    <button menu-toggle="right" class="button button-icon icon ion-navicon"></button>
+    <button menu-toggle="right" class="button button-icon icon ion-more"></button>
   </ion-nav-buttons>
-  <ion-content ng-controller="ArticleController as article" padding="true" class="has-header">
-    <div class="row">    
-      <div class="col col-90"><h1>{{ item.dabas.name }}</h1></div>
-      <div class="col"><i class="icon" ng-click="toggleFav(item.dabas.GTIN, item.dabas.name, item.dabas.producer, item.dabas.country, item.dabas.images[0].Lank)" ng-class="(favorite == true) ? 'ion-ios7-star' : 'ion-ios7-star-outline'"></i></div>  
+  <ion-content ng-controller="ArticleController as article" padding="false" class="has-header">
+    <div class="row item-no-margin title-row">    
+      <div class="col col-90 item item-assertive padding-left padding-right padding-top padding-bottom"><h1 class="article-title">{{ item.dabas.name }}</h1></div>
+      <div class="col center item item-assertive padding-left padding-right padding-top padding-bottom"><i class="icon favorite-button" ng-click="toggleFav(item.dabas.GTIN, item.dabas.name, item.dabas.producer, item.dabas.country, item.dabas.images[0].Lank)" ng-class="(favorite == true) ? 'ion-ios7-star' : 'ion-ios7-star-outline'"></i></div>  
+    </div>
+    <div class="row item-no-margin-sides calculated-carbon" ng-show="item.carbon > 0">
+      <div class="col item item-calm padding-left padding-right padding-top padding-bottom">
+        <h1>{{item.carbon}}</h1>
+        <div>kg CO<sub>2</sub></div>
+      </div>
+      <div class="col item item-balanced padding-left padding-right padding-top padding-bottom">
+        <h1>= {{item.carbon*6}}</h1>
+        <div>km bilresa</div>
+      </div>
     </div>
     <div class="row">
-      <div class="col" ng-show="item.dabas.images[0].Lank"><img style="max-width:100%;max-height:200px" ng-src="{{item.dabas.images[0].Lank}}" /></div>
-      <div class="col">
-        <h2>{{item.carbon}} g CO<sub>2</sub></h2>
-        <ion-list>
-            <ion-item ng-show="item.dabas.weight > 0">
-            <strong>Vikt:</strong> {{ item.dabas.weight }} g
-            </ion-item>
-            <ion-item ng-show="item.dabas.country">
-            {{item.dabas.country}}
-            </ion-item>
-            <ion-item class="item" ng-show="item.dabas.producer">
-            {{item.dabas.producer}}
-            </ion-item>
-        </ion-list>
+      <div class="col padding-right padding-top padding-bottom" ng-show="item.dabas.images[0].Lank">
+        <div class="article-image center">
+          <img ng-src="{{item.dabas.images[0].Lank}}" />
+        </div>
+      </div>
+      <div class="col padding-left padding-top padding-bottom">
+        <p><strong>Vikt:</strong> {{ item.dabas.weight }}</p>
+        <p><strong>Land:</strong> {{ item.dabas.country }}</p>
+        <p><strong>Tillverkare:</strong> {{ item.dabas.producer }}</p>
       </div>
     </div>
     <ion-list>
@@ -43,7 +48,7 @@
           <p><strong>Genomsnittligt utsläpp:</strong> {{ item.lcafd.average }} g CO<sub>2</sub> per gram</p>
           <p><strong>Max utsläpp:</strong> {{ item.lcafd.max }} g CO<sub>2</sub> per gram</p>
           <p><strong>Min utsläpp:</strong> {{ item.lcafd.min }} g CO<sub>2</sub> per gram</p>
-          <p><strong>Källa:</strong> <a href="http://crowd.kasperi.se/web/livsmedel/{{ item.lcafd.id }}">LCAFD</a></p>
+          <p><strong>Källa:</strong> <a href="http://lcafdb.org/livsmedel/{{ item.lcafd.id }}">Life Cycle Assesment of Food Database</a></p>
         </div>
         <ion-item class="item item-icon-right" ng-show="item.dabas.labels.length > 0" ng-click="show('labels')">
           Miljömärkningar

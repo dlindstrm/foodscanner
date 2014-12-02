@@ -5,10 +5,10 @@ angular.module('foodscan.articleController', [])
   Articles.getArticle($stateParams.gtin, function(error, data) {
     if(error !== null) {
       $ionicNavBarDelegate.back();
-      return alert("Något fel med servern.");
     }
     $ionicLoading.hide();
     $scope.item = data;
+    console.log($scope.item);
   })
 
   $scope.accordion = {

@@ -40,18 +40,28 @@
 }*/
 
 
-$light:                           #fff !default;
-$stable:                          #fff !default;
-$positive:                        #d2704b !default;
-$calm:                            #f6cd64 !default;
-$balanced:                        #f1ac53 !default;
-$energized:                       #d64741 !default;
-$assertive:                       #bbe3e5 !default;
-$dark:                            #555 !default;
+$light:                           #fcfcfc !default;
+$stable:                          #f5f5f5 !default;
+$positive:                        #48e1b2 !default;
+$calm:                            #ededed !default;
+$balanced:                        #9b9b9b !default;
+$energized:                       #303030 !default;
+$assertive:                       #ce6162 !default;
+$royal:                           #d8dcdd !default;
+$dark:                            #0d0d0d !default;
 
-$base-background-color:           #bbe3e5 !default;
+$base-background-color:           #fcfcfc !default;
 
-$font-family-sans-serif:          "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$font-family-sans-serif:          "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$font-family-light-sans-serif:    "Raleway", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif !default;
+
+
+/**
+ * Buttons
+ */
+
+$button-calm-text:                #0d0d0d !default;
+$button-calm-border:              #d8dcdd !default;
 
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
