@@ -21,7 +21,7 @@
 	height: 99% !important;
 }
 .button.start-item {
-	min-height: 130px;
+	min-height: 150px;
 	height: 25%;
 	margin: 0;
 	border-top-width: 0;
@@ -42,13 +42,14 @@
 .bar-search input,
 .bar-search button {
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	text-transform: none !important;
 }
 .item.clear-history {
 	color: #d2584b;
 }
 .search-info i {
 	font-size: 150px;
-	color: #000;
+	color: #40cda2;
 }
 
 /**
@@ -115,10 +116,16 @@ h1.article-title {
 /**
  * Utility
  */
+h1, h2, h3, h4, h5, h6 {
+	font-weight: 700;
+} 
 .button {
 	font-weight: 700;
 	text-transform: uppercase;
-
+}
+.button.active,
+.button.activated {
+	box-shadow: none !important;
 }
 .modal {
 	background: #f9f9f9;

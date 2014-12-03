@@ -8,7 +8,7 @@
 
 	  <label class="item item-input item-select">
 	    <div class="input-label">
-	      Nivå 1
+	      1
 	    </div>
 	    <select ng-model="lvl1" ng-change="setLvl(lvl1.no)" ng-options="cat as cat.article for cat in levelOne">
 	    	<option value="">Välj varuområde</option>
@@ -17,7 +17,7 @@
 
 	  <label ng-class="selected1 == false ? 'disabled' : ''" class="item item-input item-select">
 	    <div class="input-label">
-	      Nivå 2
+	      2
 	    </div>
 	    <select ng-model="lvl2" ng-change="setLvl(lvl1.no, lvl2.no)" ng-options="cat as cat.article for cat in levelTwo">
 	    	<option value="">Välj huvudgrupp</option>
@@ -26,7 +26,7 @@
 
 	  <label ng-class="selected2 == false ? 'disabled' : ''" class="item item-input item-select">
 	    <div class="input-label">
-	      Nivå 3
+	      3
 	    </div>
 	    <select ng-model="lvl3" ng-options="cat as cat.article for cat in levelThree">
 	    	<option value="">Välj varugrupp</option>

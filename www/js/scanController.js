@@ -3,10 +3,12 @@ angular.module('foodscan.scanController', [])
 .controller("ScanController", function($scope, $cordovaBarcodeScanner, Articles) { 
   $scope.scanBarcode = function() {
       $cordovaBarcodeScanner.scan().then(function(imageData) {
-          alert("Format: "+imageData.format+"Code: "+imageData.text);
           Articles.goTo(imageData.text);
       }, function(error) {
-          console.log("An error happened -> " + error);
+           $ionicPopup.alert({
+             title: 'Något gick fel',
+             template: 'Något gick fel vid skanningen. Vänligen försök igen.'
+           });
       });
   }; 
 })

@@ -43,7 +43,7 @@ angular.module('foodscan.searchController', [])
       var previous = JSON.parse(window.localStorage.getItem('previous_searches'));
       if(previous) {
         if(!_.find(previous, function(key){ return key === $scope.input}))
-          previous.push($scope.input);
+          previous.unshift($scope.input);
       }
       else {
         var previous = [];
@@ -82,11 +82,11 @@ angular.module('foodscan.searchController', [])
      buttons: [
       {
         text: 'Avbryt',
-        type: 'button-calm no-border',
+        type: 'button-balanced',
       }, 
       {
         text: 'Ta bort',
-        type: 'button-assertive no-border',
+        type: 'button-assertive',
         onTap: function(e) {
           $scope.previousSearches = [];
           window.localStorage.removeItem("previous_searches");

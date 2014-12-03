@@ -50,7 +50,7 @@ $assertive:                       #ce6162 !default;
 $royal:                           #d8dcdd !default;
 $dark:                            #0d0d0d !default;
 
-$base-background-color:           #fcfcfc !default;
+$base-background-color:           #f5f5f5 !default;
 
 $font-family-sans-serif:          "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
 $font-family-light-sans-serif:    "Raleway", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif !default;
@@ -60,8 +60,10 @@ $font-family-light-sans-serif:    "Raleway", "Helvetica Neue Light", "Helvetica 
  * Buttons
  */
 
-$button-calm-text:                #0d0d0d !default;
-$button-calm-border:              #d8dcdd !default;
+$button-stable-text:                #0d0d0d !default;
+$button-stable-border:              #ededed !default;
+$button-stable-active-bg:           darken($stable, 15%) !default;
+$button-stable-active-border:       darken($button-stable-border, 15%) !default;
 
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;

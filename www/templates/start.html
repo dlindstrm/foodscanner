@@ -1,5 +1,7 @@
 <ion-view title="Foodscanner" ng-controller="StartController as start" hide-back-button="true">
-
+  <ion-nav-buttons side="right">
+    <button class="button button-icon icon ion-ios7-information-outline"></button>
+  </ion-nav-buttons>
   <ion-content class="has-header start">    
 
     <button class="button button-large button-full button-stable border-bottom start-item scan" ng-controller="ScanController as scan" ng-click="scanBarcode()">

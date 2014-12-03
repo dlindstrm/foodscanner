@@ -29,13 +29,23 @@ angular.module('foodscan.services', [])
         window.localStorage.setItem('articles', JSON.stringify(articles));
         if(status !== 200) {
           $ionicLoading.hide()
-          return alert("Ingen artikel hittades.")
+           $scope.showAlert = function() {
+             var alertPopup = $ionicPopup.alert({
+               title: 'Ingen artikel hittades',
+               template: 'Artikeln du skannade hittades inte.'
+             });
+             alertPopup.then(function(res) {
+             });
+           };
         }
         $location.path("/app/article/"+gtin)
       })
       .error(function(status, data) {
         $ionicLoading.hide();
-        return alert("Ingen artikel hittades.")
+         $ionicPopup.alert({
+           title: 'Serverfel ',
+           template: 'Ingen uppkoppling mot servern.'
+         });
       });
     },
 

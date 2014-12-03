@@ -5,7 +5,7 @@
     	<input ng-model="search.searchInput" ng-change="search.change()" type="search" placeholder="Sök artikel">
   	</label>
   	<button class="button button-clear" ng-click="search.cancel()">
-    	Cancel
+    	Avbryt
   	</button>
 </ion-header-bar>
 <ion-content>
@@ -17,7 +17,7 @@
         <p><strong>{{ article.dabas.producer }}</strong> {{ article.dabas.country }}</p>
   		</li>
   	</ul>
-    <button ng-click="search.showAll()" class="button button-full button-calm item-no-margin">
+    <button ng-click="search.showAll()" class="button button-full button-positive item-no-margin">
       Visa alla resultat
     </button>
   </div>
@@ -36,7 +36,7 @@
     </ul>
   </div>
   <div class="center search-info padding-top" ng-show="noArticles === true && (previousSearches === null || previousSearches.length < 1)">
-  <i class="icon ion-search placeholder-icon"></i>
+  <i class="icon ion-ios7-search placeholder-icon"></i>
   <h3>Sök</h3>
   <p>Sök efter artiklar du vill veta koldioxidutsläppet om.</p>
   </div>
