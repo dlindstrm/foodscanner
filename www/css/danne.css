@@ -1,0 +1,55 @@
+.calculated-carbon h1 {
+	margin-top: 0;
+	color: #0d0d0d;
+}
+
+.info-text {
+	color: #9b9b9b !important;
+	margin-top: 5px;
+	font-size: 13px;
+	font-weight: 500;
+
+}
+
+
+
+
+.numbers {
+	font-family: Roboto;
+}
+
+.article-image div {
+	width: 120px;
+	height: 120px;
+	border-radius: 100%;
+	margin: 25px auto;
+	border: 5px solid #fff;
+	box-shadow: 0px 0px 5px 0px rgba(50, 50, 50, 0.3);
+}
+
+.accordion-content .info-text {
+	font-size: 11px;
+}
+
+.accordion-content div{
+	color: #fff;
+	font-size: 13px;
+}
+
+.accordion-content div a{
+	color: #fff !important;
+}
+
+.accordion-content div a:visited{
+	color: #fff !important;
+}
+
+.long-text {
+	white-space: normal !important;
+}
+
+.text-overflow {
+	white-space: nowrap;
+    text-overflow: ellipsis;
+	overflow: hidden;
+}
