@@ -127,10 +127,9 @@ angular.module('foodscan.services', [])
           return obj.dabas.productcode.length > 1;
         })
 
-        
         original = data;
-        window.localStorage.setItem('original', JSON.stringify(original));
-        $location.path("app/articlelist");
+        //window.localStorage.setItem('original', JSON.stringify(original));
+        $location.path("/app/articlelist");
         $ionicLoading.hide();
       })
       .error(function(data, status) {

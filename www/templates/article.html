@@ -39,8 +39,8 @@
         <div class="col" bg-show="item.dabas.producer"><div class="info-text uppercase">Tillverkare</div><div class="uppercase text-overflow">{{ item.dabas.producer }}</div></div>
         </ion-item>
         </div>
-        <ion-item class="item item-icon-right" ng-show="item.dabas.ingredients.length > 0" ng-click="show('ingredients')">
-          Ingredienser
+        <ion-item class="item item-icon-right uppercase" ng-show="item.dabas.ingredients.length > 0" ng-click="show('ingredients')">
+          <h3>Ingredienser</h3>
           <i class="icon" ng-class="(accordion.ingredients == 1) ? 'ion-ios7-arrow-up' : 'ion-ios7-arrow-down'"></i>
         </ion-item>
         <ion-item class="item item-energized accordion-content" ng-show="accordion.ingredients === 1">
@@ -49,16 +49,16 @@
             <div ng-show="ingredient.carbon" class="col">{{ ingredient.carbon }} CO<sub>2</sub> per gram</div>
           </div>
         </ion-item>
-        <ion-item class="item item-icon-right" ng-click="show('carbon')">
-          Koldioxidinformation
+        <ion-item class="item item-icon-right uppercase" ng-click="show('carbon')">
+          <h3>Koldioxidinformation</h3>
           <i class="icon" ng-class="(accordion.carbon == 1) ? 'ion-ios7-arrow-up' : 'ion-ios7-arrow-down'"></i>
         </ion-item>
         <ion-item class="item item-energized accordion-content long-text" ng-show="accordion.carbon === 1">
           <div>Koldioxidvärdet som visas är en uppskattning och ska inte ses som ett exakt värde, utan snarare som en fingervisning. All koldioxiddata är hämtad från LCAFDB (Life Cycle Assesment Food Database). Finns inte det specifika livsmedlet i LCAFDB visas istället koldioxidutsläppet för det aktuella livsmedlets kategori.</div><br/>
           <div>För mer info besök <a href="http://lcafdb.org">LCAFDB</a>.</diV>
         </ion-item>
-        <ion-item class="item item-icon-right" ng-show="item.dabas.labels.length > 0" ng-click="show('labels')">
-          Miljömärkningar
+        <ion-item class="item item-icon-right uppercase" ng-show="item.dabas.labels.length > 0" ng-click="show('labels')">
+          <h3>Miljömärkningar</h3>
           <i class="icon" ng-class="(accordion.labels == 1) ? 'ion-ios7-arrow-up' : 'ion-ios7-arrow-down'"></i>
         </ion-item>
         <div class="accordion-content" ng-show="accordion.labels === 1">
@@ -68,8 +68,8 @@
             {{label.desc}}
           </ion-item>
         </div>
-        <ion-item class="item item-icon-right" ng-click="show('categories')">
-          Relaterade artiklar
+        <ion-item class="item item-icon-right uppercase" ng-click="show('categories')">
+          <h3>Relaterade artiklar</h3>
           <i class="icon" ng-class="(accordion.categories == 1) ? 'ion-ios7-arrow-up' : 'ion-ios7-arrow-down'"></i>
         </ion-item>
         <div class="accordion-content" ng-show="accordion.categories === 1">

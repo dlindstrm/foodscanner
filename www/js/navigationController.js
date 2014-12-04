@@ -1,6 +1,6 @@
 angular.module('foodscan.navigationController', [])
 
-.controller("NavigationController", function($scope, $location, $ionicPopover, $ionicNavBarDelegate) { 
+.controller("NavigationController", function($scope, $location, $ionicPopover, $ionicNavBarDelegate, $timeout) { 
 
   /**
    * Popover for the navigation
@@ -31,8 +31,12 @@ angular.module('foodscan.navigationController', [])
   // Execute action on hide popover
   $scope.$on('popover.hidden', function() {
     $scope.isOpened = false;
+    angular.element(document.querySelector('.navigation').parentNode.parentNode).addClass("hiding")
     angular.element(document.querySelector('ion-view > ion-content')).removeClass("blur");
     angular.element(document.querySelector('ion-view > .bar-subheader')).removeClass("blur");
+    $timeout(function() {
+      angular.element(document.querySelector('.navigation').parentNode.parentNode).removeClass("hiding");
+    }, 400)
   });
   // Execute action on remove popover
   $scope.$on('popover.removed', function() {
@@ -56,13 +60,23 @@ angular.module('foodscan.navigationController', [])
     window.localStorage.removeItem('recent_articles');
     window.localStorage.removeItem('articles');
     window.localStorage.removeItem('original');
-
+    
     this.closeNavigation();
-    $location.path(path);
+    if($location.path() !== path) {
+      angular.element(document.querySelector('body')).addClass('no-nav-animation');
+      $timeout(function() {
+        angular.element(document.querySelector('body')).removeClass('no-nav-animation');
+      }, 400)
+      $location.path(path);
+    }
   } 
 
   this.goBack = function() {
     this.closeNavigation();
+    angular.element(document.querySelector('body')).addClass('no-nav-animation');
+    $timeout(function() {
+      angular.element(document.querySelector('body')).removeClass('no-nav-animation');
+    }, 400)
     $ionicNavBarDelegate.back(); 
   }
 })

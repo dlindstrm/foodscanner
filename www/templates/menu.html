@@ -2,7 +2,7 @@
   <ion-nav-bar class="bar-dark nav-title-slide-ios7" animation="no-animation">
     <ion-nav-back-button ng-click="nav.goBack()" class="button-clear"><i class="icon ion-ios7-arrow-back"></i></ion-nav-back-button>
   </ion-nav-bar>
-  <ion-nav-view name="menuContent" animation="fade-in-out"></ion-nav-view>
+  <ion-nav-view name="menuContent" animation="no-animation"></ion-nav-view>
 </ion-pane>
 
 <script id="navigation.html" type="text/ng-template">
@@ -14,13 +14,13 @@
         <ion-item nav-clear class="item item-positive center" ng-controller="ScanController as scan" ng-click="scanBarcode()">
           <i class="icon ion-ios7-barcode-outline"></i>
         </ion-item>
-        <ion-item nav-clear class="item item-positive center" ng-click="nav.navigateTo('/app/search')" >
+        <ion-item class="item item-positive center" ng-click="nav.navigateTo('/app/search')" >
           <i class="icon ion-ios7-search"></i>
         </ion-item>
-        <ion-item nav-clear class="item item-positive center" ng-click="nav.navigateTo('/app/browse')" >
+        <ion-item class="item item-positive center" ng-click="nav.navigateTo('/app/browse')" >
           <i class="icon ion-ios7-albums-outline"></i>
         </ion-item>
-        <ion-item nav-clear class="item item-positive center" ng-click="nav.navigateTo('/app/favorites')" >
+        <ion-item class="item item-positive center" ng-click="nav.navigateTo('/app/favorites')" >
           <i class="icon ion-ios7-star-outline"></i>
         </ion-item>
       </ion-list>

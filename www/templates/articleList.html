@@ -14,7 +14,7 @@
         </div>
       </div>
       <div class="col">
-        <div class="button button-block button-balanced" ng-click="popover.show($event)">
+        <div class="button button-block button-balanced" ng-click="openModal(3)">
           <span ng-class="sortActive == true ? 'underline' : ''">Sortera</span>
         </div>
       </div>
@@ -97,21 +97,27 @@
   </script>
 
   <script id="sort.html" type="text/ng-template">
-    <ion-popover-view class="articles-sort no-animation">
-        <ul class="list no-margin">
-          <li class="item" ng-class="sortProperty == 'name' ? 'item-icon-right item-positive' : 'item-balanced'" ng-click="applySort('name', 'Namn')">
-            Namn
-            <i ng-show="sortProperty == 'name'" class="icon ion-ios7-checkmark-empty"></i>
-          </li>
-          <li class="item item-balanced" ng-class="sortProperty == 'country' ? 'item-icon-right' : ''" ng-click="applySort('country', 'Land')">
-            Land
-            <i ng-show="sortProperty == 'country'" class="icon ion-ios7-checkmark-empty"></i>
-          </li>
-          <li class="item item-balanced" ng-class="sortProperty == 'producer' ? 'item-icon-right' : ''" ng-click="applySort('producer', 'Tillverkare')">
-            Tillverkare
-            <i ng-show="sortProperty == 'producer'" class="icon ion-ios7-checkmark-empty"></i>
-          </li>
-        </ul>
+    <ion-modal-view>
+      <ion-header-bar class="bar bar-dark">
+        <div class="button button-clear" ng-click="closeModal(3)">Avbryt</div>
+        <h1 class="title item-assertive">Sortera</h1>
+      <div class="button button-clear" ng-click="applySort(sort.property)">Välj</div>
+      </ion-header-bar>
+      <ion-content>
+            <ion-radio ng-model="sort.property" ng-value="'ng'">
+              Ingen sorterting
+            </ion-radio>
+            <ion-radio ng-model="sort.property" ng-value="'name'">
+              Namn
+            </ion-radio>
+            <ion-radio ng-model="sort.property" ng-value="'country'" ng-checked="sort.property === 'country'">
+              Land
+            </ion-radio>
+            <ion-radio ng-model="sort.property" ng-value="'producer'" ng-checked="sort.property === 'producer'">
+              Tillverkare 
+            </ion-radio>
+          </ion-list>
+      </ion-content>
     </ion-popover-view>
   </script>
 </ion-view>

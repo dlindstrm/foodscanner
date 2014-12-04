@@ -45,9 +45,9 @@ angular.module('foodscan.articleListController', [])
   
   filter = function() {
     var articles = ArticleList.getOriginal();
-    if($scope.sortProperty !== ('' || undefined)) {
+    if($scope.sort.property !== 'ng') {
       $scope.sortActive = true;
-      articles = _.sortBy(articles, function(obj){ return obj.dabas[$scope.sortProperty]; });
+      articles = _.sortBy(articles, function(obj){ return obj.dabas[$scope.sort.property]; });
     }
     else {
       $scope.sortActive = false;
@@ -179,7 +179,7 @@ angular.module('foodscan.articleListController', [])
 
   
   /**
-   * Modals for filtering
+   * Modals for filtering/sorting
    */
 
   $ionicModal.fromTemplateUrl('categories.html', {
@@ -199,13 +199,24 @@ angular.module('foodscan.articleListController', [])
     $scope.oModal2 = modal;
   });
 
+  $ionicModal.fromTemplateUrl('sort.html', {
+    id: 3,
+    scope: $scope,
+    backdropClickToClose: false,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.oModal3 = modal;
+  });
+
   $scope.openModal = function(index) {
     if(index == 1) $scope.oModal1.show();
-    else $scope.oModal2.show();
+    else if(index == 2) $scope.oModal2.show();
+    else $scope.oModal3.show();
   };
   $scope.closeModal = function(index) {
     if(index == 1) $scope.oModal1.hide();
-    else $scope.oModal2.hide();
+    else if(index == 2) $scope.oModal2.hide();
+    else $scope.oModal3.hide();
   };
   
   // Cleanup the modals when we're done with them (i.e: state change)
@@ -214,35 +225,14 @@ angular.module('foodscan.articleListController', [])
   $scope.$on('$destroy', function() {
     $scope.oModal1.remove();
     $scope.oModal2.remove();
+    $scope.oModal3.remove();
   });
-
-  /**
-   * Popover for sorting
-   */
   
-  $ionicPopover.fromTemplateUrl('sort.html', { scope: $scope }).then(function(popover) {
-    $scope.popover = popover;
-  });
-
-  $scope.openPopover = function($event) {
-    $scope.popover.show($event);
+  $scope.sort = {
+    property: 'ng'
   };
-  $scope.closePopover = function() {
-    $scope.popover.hide();
-  };
-  //Cleanup the popover when we're done with it!
-  $scope.$on('$destroy', function() {
-    $scope.popover.remove();
-  });
-
-  /**
-   * Sort
-   */
-    
-  $scope.applySort = function(property, name) {
-    $scope.sortProperty = (property == $scope.sortProperty) ? '' : property;
-    $scope.sortName = (name == $scope.sortName) ? '' : name;
+  $scope.applySort = function(property) {
+    $scope.closeModal(3);
     filter();
-    $scope.closePopover();
   };
 });

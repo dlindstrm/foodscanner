@@ -10,15 +10,10 @@ angular.module('foodscan', ['ionic', 'ngCordova', 'underscore', 'ui.unique', 'fo
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
-    if(window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-    }
-    
-    $cordovaStatusbar.overlaysWebView(true);
-    $cordovaStatusBar.style(2);
+  
     if(window.StatusBar) {
       // org.apache.cordova.statusbar required
-      StatusBar.styleDefault();
+      StatusBar.style(2);
     }
   });
 })
@@ -63,7 +58,7 @@ angular.module('foodscan', ['ionic', 'ngCordova', 'underscore', 'ui.unique', 'fo
       url: "/articlelist",
       views: {
         'menuContent' :{
-          templateUrl: "templates/articlelist.html"
+          templateUrl: "templates/articleList.html"
         }
       }
     })

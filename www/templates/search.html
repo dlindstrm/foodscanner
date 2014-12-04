@@ -1,10 +1,10 @@
 <ion-view hide-nav-bar="true" ng-controller="SearchController as search">
-<ion-header-bar class="bar bar-dark bar-header item-input-inset bar-search" animation="no-animation">
+<ion-header-bar class="bar bar-dark bar-header item-input-inset bar-search">
  	<label class="item-input-wrapper">
     	<i class="icon ion-ios7-search placeholder-icon"></i>
     	<input ng-model="search.searchInput" ng-change="search.change()" type="search" placeholder="Sök artikel">
   	</label>
-  	<button class="button button-clear" nav-clear ng-click="search.cancel()">
+  	<button class="button button-clear" ng-click="search.cancel()">
     	Avbryt
   	</button>
 </ion-header-bar>
