@@ -61,12 +61,12 @@
           <h3>Miljömärkningar</h3>
           <i class="icon" ng-class="(accordion.labels == 1) ? 'ion-ios7-arrow-up' : 'ion-ios7-arrow-down'"></i>
         </ion-item>
-        <div class="accordion-content" ng-show="accordion.labels === 1">
-          <ion-item ng-repeat="label in item.dabas.labels">
-            <img src="img/{{label.Typkod}}.png" />
-            <p>{{label.Typ}}</p>
-            {{label.desc}}
-          </ion-item>
+        <div class="accordion-content" ng-show="accordion.labels === 1">              
+              <div ng-repeat="label in item.dabas.labels" class="item item-thumbnail-left item-text-wrap">
+                <img src="img/{{label.Typkod}}.png" />
+                <h2>{{label.Typ}}</h2>
+                <h4>{{label.desc}}</h4>
+              </div>     
         </div>
         <ion-item class="item item-icon-right uppercase" ng-click="show('categories')">
           <h3>Relaterade artiklar</h3>
