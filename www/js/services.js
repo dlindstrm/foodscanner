@@ -1,6 +1,6 @@
 angular.module('foodscan.services', [])
 
-.factory('Articles', function($http, $location, $ionicLoading, _) {
+.factory('Articles', function($http, $location, $ionicLoading, $ionicPopup, _) {
   
   var url = "http://fsserver.kspri.se/api/get/article";
   var articles = JSON.parse(window.localStorage.getItem('articles')) || [];
@@ -30,11 +30,9 @@ angular.module('foodscan.services', [])
         if(status !== 200) {
           $ionicLoading.hide()
            $scope.showAlert = function() {
-             var alertPopup = $ionicPopup.alert({
+             $ionicPopup.alert({
                title: 'Ingen artikel hittades',
                template: 'Artikeln du skannade hittades inte.'
-             });
-             alertPopup.then(function(res) {
              });
            };
         }
