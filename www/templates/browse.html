@@ -1,6 +1,6 @@
 <ion-view title="Bläddra" ng-controller="BrowseController as browse">
   <ion-nav-buttons side="right">
-    <button menu-toggle="right" class="button button-icon icon ion-more"></button>
+    <button ng-click="nav.toggleNav($event)" class="button button-icon nav-button icon ion-android-more"></button>
   </ion-nav-buttons>
   <ion-content class="has-header" scroll="false">    
   	<div class="list">
@@ -32,7 +32,9 @@
 	    	<option value="">Välj varugrupp</option>
 	    </select>
 	  </label>
-	<button ng-click="show(lvl1.no, lvl2.no, lvl3.no)" class="button button-block button-positive">Visa produkter</button>
+	<div class="padding-left padding-top padding-right padding-bottom">
+		<button ng-class="selected1 === false ? 'disabled' : ''" ng-click="show(lvl1.no, lvl2.no, lvl3.no)" class="button button-block button-positive">Visa produkter</button>
+	</div>
 	</form>
 	</div>
 	

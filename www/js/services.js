@@ -22,9 +22,27 @@ angular.module('foodscan.services', [])
         $ionicLoading.hide();
         return $location.path("/app/article/"+gtin)
       }
-
+      var labels = [{"Typkod": "KRAV_MARK", "desc": "KRAV-märket visar att en vara är producerad på ekologisk grund med extra höga krav på djuromsorg, hälsa, socialt ansvar och klimatpåverkan."},
+       {"Typkod": "EU_ORGANIC_FARMING", "desc": "Put simply, organic farming is an agricultural system that seeks to provide you, the consumer, with fresh, tasty and authentic food while respecting natural life-cycle systems."},
+       {"Typkod": "RAINFOREST_ALLIANCE", "desc": "hejehj"},
+       {"Typkod": "EU_ECO_LABEL", "desc": "sfdsf"},
+       {"Typkod": "SWEDISH_SEAL_OF_QUALITY", "desc": "Svenskt Sigill är ett märke som hjälper handlare och konsumenter att kunna välja produkter som producerats med större hänsyn till djur och natur. En bättre produktionskvalitet helt enkelt."}];
       $http.get(url + '?gtin=' + gtin)
       .success(function(data, status) {
+        var newLabels = [];
+        for(var i=0;i<labels.length;i++) {
+          var exist = _.find(data.dabas.labels, function(obj) {
+            console.log(obj.Typkod);
+            return obj.Typkod === labels[i].Typkod;
+          })
+          if(exist) {
+            exist["desc"] = labels[i].desc;
+            newLabels.push(exist);
+          }
+          
+        }
+        data.dabas.labels = newLabels;
+        console.log(data);
         articles.push(data);
         window.localStorage.setItem('articles', JSON.stringify(articles));
         if(status !== 200) {

@@ -4,15 +4,18 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('foodscan', ['ionic', 'ngCordova', 'underscore', 'ui.unique', 'foodscan.startController', 'foodscan.scanController', 'foodscan.articleController', 'foodscan.searchController', 'foodscan.browseController', 'foodscan.favoriteController', 'foodscan.articleListController', 'foodscan.services'])
+angular.module('foodscan', ['ionic', 'ngCordova', 'underscore', 'ui.unique', 'foodscan.navigationController', 'foodscan.scanController', 'foodscan.articleController', 'foodscan.searchController', 'foodscan.browseController', 'foodscan.favoriteController', 'foodscan.articleListController', 'foodscan.services'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $cordovaStatusbar) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if(window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
     }
+    
+    $cordovaStatusbar.overlaysWebView(true);
+    $cordovaStatusBar.style(2);
     if(window.StatusBar) {
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();

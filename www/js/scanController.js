@@ -3,7 +3,9 @@ angular.module('foodscan.scanController', [])
 .controller("ScanController", function($scope, $cordovaBarcodeScanner, Articles) { 
   $scope.scanBarcode = function() {
       $cordovaBarcodeScanner.scan().then(function(imageData) {
-          Articles.goTo(imageData.text);
+          if(imageData.text) {
+            Articles.goTo(imageData.text);
+          }
       }, function(error) {
            $ionicPopup.alert({
              title: 'Något gick fel',

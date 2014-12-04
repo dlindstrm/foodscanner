@@ -1,6 +1,6 @@
 angular.module('foodscan.articleListController', [])
 
-.controller("ArticleListController", function($scope, $http, $stateParams, $timeout, $ionicModal, $ionicPopover, Articles, ArticleList) {
+.controller("ArticleListController", function($scope, $http, $stateParams, $timeout, $ionicModal, $ionicPopover, $ionicScrollDelegate, Articles, ArticleList) {
   $scope.catFilter = [];
   $scope.producerFilter = [];
   $scope.countryFilter = [];
@@ -16,9 +16,15 @@ angular.module('foodscan.articleListController', [])
   }
 
   $scope.loadMore = function() {
-    $scope.currentPage++;
-    var newItems = ArticleList.get($scope.currentPage*$scope.itemsPerPage, $scope.itemsPerPage);
-    $scope.articles = $scope.articles.concat(newItems);
+    $scope.loader = true;
+    $timeout(function() {
+      $scope.currentPage++;
+      var newItems = ArticleList.get($scope.currentPage*$scope.itemsPerPage, $scope.itemsPerPage);
+      $scope.articles = $scope.articles.concat(newItems);
+      $scope.loader = false;
+      $ionicScrollDelegate.resize();
+    }, 200);
+
   };
 
   $scope.nextPageDisabledClass = function() {
@@ -39,7 +45,7 @@ angular.module('foodscan.articleListController', [])
   
   filter = function() {
     var articles = ArticleList.getOriginal();
-    if($scope.sortProperty !== '') {
+    if($scope.sortProperty !== ('' || undefined)) {
       $scope.sortActive = true;
       articles = _.sortBy(articles, function(obj){ return obj.dabas[$scope.sortProperty]; });
     }

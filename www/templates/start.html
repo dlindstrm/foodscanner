@@ -1,22 +1,19 @@
-<ion-view title="Foodscanner" ng-controller="StartController as start" hide-back-button="true">
-  <ion-nav-buttons side="right">
-    <button class="button button-icon icon ion-ios7-information-outline"></button>
-  </ion-nav-buttons>
+<ion-view title="Foodscanner" hide-back-button="true">
   <ion-content class="has-header start">    
 
     <button class="button button-large button-full button-stable border-bottom start-item scan" ng-controller="ScanController as scan" ng-click="scanBarcode()">
       <div><i class="icon ion-ios7-barcode-outline"></i></div>
       <div>Skanna</div>
     </button>
-    <button ng-click="go('/app/search')" class="button button-large border-bottom button-full button-stable start-item search">
+    <button ng-click="nav.navigateTo('/app/search')" class="button button-large border-bottom button-full button-stable start-item search">
       <div><i class="icon ion-ios7-search"></i></div>
       <div>Sök</div>
      </button>
-    <button ng-click="go('/app/browse')" class="button button-large button-full border-bottom button-stable start-item browse">
+    <button ng-click="nav.navigateTo('/app/browse')" class="button button-large button-full border-bottom button-stable start-item browse">
       <div><i class="icon ion-ios7-albums-outline"></i></div>
       <div>Bläddra</div>
     </button>
-    <button ng-click="go('/app/favorites')" class="button button-large button-full button-stable start-item favorites">
+    <button ng-click="nav.navigateTo('/app/favorites')" class="button button-large button-full button-stable start-item favorites">
       <div><i class="icon ion-ios7-star-outline"></i></div>
       <div>Favoriter</div>
     </button>
