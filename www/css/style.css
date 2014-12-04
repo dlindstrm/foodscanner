@@ -50,10 +50,13 @@ h1, h2, h3, h4, h5, h6, .label {
 	height: auto !important;
 	right: 0 !important;
 	left: auto !important;
-	margin: 0;
+	margin: 5px 0 0 0 !important;
 }
 .navigation .item {
 	padding: 10px;
+	border-color: #1fbd8b !important;
+	background-color: #48e1b2 !important;
+	color: #fff !important;
 }
 .nav-button.button.button-icon:before {
 	font-size:24px !important;
@@ -62,7 +65,7 @@ h1, h2, h3, h4, h5, h6, .label {
 	font-size:24px;
 }
 .popover .item:last-child {
-	border-bottom-width: 1px solid #1fbd8b;
+	border-bottom: 1px solid #1fbd8b;
 }
 
 /**
@@ -150,8 +153,8 @@ ion-view > .bar-subheader {
 .item-input-wrapper {
 	background: #fff;
 }
-.bar-search input,
-.bar-search .button {
+.platform-ios .bar-search input,
+.platform-ios .bar-search .button {
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	text-transform: none !important;
 	font-weight: normal !important;

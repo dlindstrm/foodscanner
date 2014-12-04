@@ -54,7 +54,12 @@ angular.module('foodscan.articleListController', [])
     }
     if($scope.catFilter.length !== 0) {
       $scope.catActive = true;
-      articles = _.filter(articles, function(obj){ return $scope.catFilter.indexOf(obj.productgroup.majorGroup.article) !== -1; });
+      articles = _.filter(articles, function(obj){
+        if(obj.productgroup.vendingGroup) 
+          return $scope.catFilter.indexOf(obj.productgroup.vendingGroup.article) !== -1; 
+        else 
+          return false;
+      });
     }
     else {
       $scope.catActive = false;
@@ -133,13 +138,13 @@ angular.module('foodscan.articleListController', [])
   getCategories = function() {
     var data = ArticleList.getOriginal();
     var unique = _.filter(data, function(obj) {
-      return "majorGroup" in obj.productgroup === true;
+      return "vendingGroup" in obj.productgroup === true;
     });
     unique = _.uniq(unique, function(item, key, no) {
-      return item.productgroup.majorGroup.article;
+      return item.productgroup.vendingGroup.article;
     });
     unique = _.pluck(unique, 'productgroup');
-    $scope.categories = _.pluck(unique, 'majorGroup');
+    $scope.categories = _.pluck(unique, 'vendingGroup');
   }
 
   getProducers = function() {
