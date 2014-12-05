@@ -128,7 +128,7 @@ angular.module('foodscan.services', [])
         })
 
         original = data;
-        //window.localStorage.setItem('original', JSON.stringify(original));
+        window.localStorage.setItem('original', JSON.stringify(original));
         $location.path("/app/articlelist");
         $ionicLoading.hide();
       })

@@ -119,18 +119,23 @@ angular.module('foodscan.articleListController', [])
   }
 
   $scope.accordion = {
-    producers: 0,
-    countries: 0
+    producer: false,
+    countries: false
   };
-
-  $scope.accordionShow = function(property) {
-    if($scope.accordion[property] === 1) {
-      $scope.accordion[property] = 0;
-    }
+  $scope.toggleGroup = function(property) {
+    if ($scope.isGroupShown(property)) {
+      $scope.accordion[property] = false;
+    } 
     else {
-      $scope.accordion[property] = 1;
+      $scope.accordion[property] = true;
     }
-  }
+    $timeout(function () {
+      $ionicScrollDelegate.resize();
+    }, 150);
+  };
+  $scope.isGroupShown = function(property) {
+    return $scope.accordion[property] === true;
+  };
 
   /**
    * Get all filter options

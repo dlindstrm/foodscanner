@@ -10,6 +10,9 @@ body, .ionic-body {
 h1, h2, h3, h4, h5, h6, .label {
 	font-weight: 600;
 }
+.item h3 {
+	margin: 0;
+}
 .item p {
 	color: #9b9b9b;
 }
@@ -50,7 +53,7 @@ h1, h2, h3, h4, h5, h6, .label {
 	height: auto !important;
 	right: 0 !important;
 	left: auto !important;
-	margin: 5px 0 0 0 !important;
+	margin: 4px 0 0 0 !important;
 }
 .navigation .item {
 	padding: 10px;
@@ -76,9 +79,7 @@ h1, h2, h3, h4, h5, h6, .label {
 	box-shadow: none !important;
 }
 .popover-backdrop {
-	-webkit-transition: all ease-in-out 250ms;
-  	-moz-transition: all ease-in-out 250ms;
-  	transition: all ease-in-out 250ms;
+ transition: all ease-in-out 250ms;
 	background: rgba(0,0,0,0.05) !important;
 	z-index: 100;
 }
@@ -90,10 +91,6 @@ h1, h2, h3, h4, h5, h6, .label {
 }
 ion-view > ion-content,
 ion-view > .bar-subheader {
-  -webkit-transition: -webkit-filter ease-in-out 250ms,
-  					filter ease-in-out 250ms;
-  -moz-transition: -moz-filter ease-in-out 250ms,
-  					filter ease-in-out 250ms;
   transition: -webkit-filter ease-in-out 250ms,
   				-moz-filter ease-in-out 250ms,
   				filter ease-in-out 250ms;
@@ -101,28 +98,21 @@ ion-view > .bar-subheader {
 .blur {
   -webkit-filter: blur(3px);
   -moz-filter: blur(3px);
-  -o-filter: blur(3px);
   -ms-filter: blur(3px);
   filter: blur(3px);
 }
 .slide-in-down {
   -webkit-transform: translate3d(0, -100%, 0);
-  -moz-transform: translate3d(0, -100%, 0);
   transform: translate3d(0, -100%, 0); }
 
 .slide-in-down.ng-enter, .slide-in-down > .ng-enter {
-  -webkit-transition: all cubic-bezier(0.1, 0.7, 0.1, 1) 400ms;
-  -moz-transition: all cubic-bezier(0.1, 0.7, 0.1, 1) 400ms;
   transition: all cubic-bezier(0.1, 0.7, 0.1, 1) 400ms; }
 
 .slide-in-down.ng-enter-active, .slide-in-down > .ng-enter-active {
   -webkit-transform: translate3d(0, 0, 0);
-  -moz-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0); }
 
 .slide-in-down.ng-leave, .slide-in-down > .ng-leave {
-  -webkit-transition: all ease-in-out 400ms;
-  -moz-transition: all ease-in-out 400ms;
   transition: all ease-in-out 400ms; }
 
 /**
@@ -192,6 +182,7 @@ ion-view > .bar-subheader {
 }
 h1.article-title {
 	font-size: 20px;
+	font-weight: 800;
 	color: #fff;
 }
 .favorite-button {
@@ -207,20 +198,18 @@ h1.article-title {
 	max-height:110px;
 	max-width:110px;
 }
-.item h3 {
-	margin: 0;
+.label-desc {
+	font-size:12px;
 }
 /**
  * Animation
  */
 .fade-in-out.ng-enter, .fade-in-out .ng-enter {
   -webkit-animation: fadeIn 0.3s;
-  -moz-animation: fadeIn 0.3s;
   animation: fadeIn 0.3s;
   position: absolute; }
 .fade-in-out.ng-leave, .fade-in-out .ng-leave {
   -webkit-animation: fadeOut 0.3s;
-  -moz-animation: fadeOut 0.3s;
   animation: fadeOut 0.3s;
   position: absolute; }
 
@@ -264,6 +253,9 @@ img {
 .center {
 	text-align: center;
 }
+.right {
+	text-align: right;
+}
 .no-padding {
 	padding: 0;
 }
@@ -275,6 +267,43 @@ img {
 	border:0 !important;
 }
 
+/**
+ * Accordion collapse
+ */
+
+.collapse {
+  display: none;
+  visibility: hidden;
+}
+.collapse.in {
+  display: block;
+  visibility: visible;
+}
+.collapsing {
+  position: relative;
+  height: 0;
+  overflow: hidden;
+  -webkit-transition-property: height, visibility;
+  -o-transition-property: height, visibility;
+     transition-property: height, visibility;
+  -webkit-transition-duration: 0.09s;
+  -o-transition-duration: 0.09s;
+     transition-duration: 0.09s;
+  -webkit-transition-timing-function: ease;
+  -o-transition-timing-function: ease;
+     transition-timing-function: ease;
+}
+
+.accordion-icon {
+	-webkit-transition: 250ms all linear;
+  	-moz-transition: 250ms all linear;
+  	transition: 250ms all linear;
+}
+.accordion-icon.open {
+	-webkit-transform: rotate(-180deg);
+	-moz-transform: rotate(-180deg);
+	transform: rotate(-180deg);
+}
 /**
 Browse
 */
