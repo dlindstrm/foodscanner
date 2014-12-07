@@ -38,6 +38,9 @@ angular.module('foodscan.articleController', [])
   $scope.toggleFav = function(id, title, producer, country, img) {
     $scope.favorite = Favorite.toggleFavorite(id, title, producer, country, img);
   }
+
+  $scope.relatedArticles = [];
+
   related = function(cat1, cat2, cat3) {
   var url = 'http://fsserver.kspri.se/api/get/article?limit=5&cat1=';
   
@@ -66,9 +69,10 @@ angular.module('foodscan.articleController', [])
     });
   }
 }
-related($scope.item.productgroup.vendingArea,$scope.item.productgroup.majorGroup,$scope.item.productgroup.vendingGroup);
-
-  this.goto = function(gtin) {
-     Articles.goTo(gtin);
-  }
+if($scope.item.productgroup) {
+  related($scope.item.productgroup.vendingArea,$scope.item.productgroup.majorGroup,$scope.item.productgroup.vendingGroup);
+}
+this.goto = function(gtin) {
+   Articles.goTo(gtin);
+}
 });

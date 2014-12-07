@@ -81,7 +81,7 @@
           </ion-item>  
         </div>
 
-        <ion-item class="item item-icon-right uppercase" ng-click="toggleGroup('related')">
+        <ion-item class="item item-icon-right uppercase" ng-click="toggleGroup('related')" ng-show="relatedArticles.length > 0">
           <h3>Relaterade artiklar</h3>
           <i class="icon ion-ios7-arrow-down accordion-icon" ng-class="isGroupShown('related') ? 'open' : ''"></i>
         </ion-item>
