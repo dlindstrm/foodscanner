@@ -119,7 +119,6 @@ angular.module('foodscan.services', [])
       $ionicLoading.show();
       $http.get(url)
       .success(function(data, status) {
-        /// TA BORT DET HÄR FILTRET
         data = _.filter(data, function(obj) {
           return obj.dabas.productcode !== null;
         })
@@ -128,7 +127,7 @@ angular.module('foodscan.services', [])
         })
 
         original = data;
-        //window.localStorage.setItem('original', JSON.stringify(original));
+        window.localStorage.setItem('original', JSON.stringify(original));
         $location.path("/app/articlelist");
         $ionicLoading.hide();
       })

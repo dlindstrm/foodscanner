@@ -4,8 +4,8 @@
   </ion-nav-buttons>
   <ion-content ng-controller="ArticleController as article" padding="false" class="has-header">
     <div class="row title-row no-padding">    
-      <div class="col col-90 item item-positive uppercase padding-top padding-bottom"><h1 class="article-title">{{ item.dabas.name }}</h1></div>
-      <div class="col center item item-positive"><i class="icon favorite-button" ng-click="toggleFav(item.dabas.GTIN, item.dabas.name, item.dabas.producer, item.dabas.country, item.dabas.images[0].Lank)" ng-class="(favorite == true) ? 'ion-ios7-star' : 'ion-ios7-star-outline'"></i></div>  
+      <div class="col col-90 item item-positive uppercase padding-top padding-bottom padding-left"><h1 class="article-title">{{ item.dabas.name }}</h1></div>
+      <div class="col right item item-positive padding-right"><i class="icon favorite-button" ng-click="toggleFav(item.dabas.GTIN, item.dabas.name, item.dabas.producer, item.dabas.country, item.dabas.images[0].Lank)" ng-class="(favorite == true) ? 'ion-ios7-star' : 'ion-ios7-star-outline'"></i></div>  
     </div>
 
     <div class="row article-image">
@@ -29,55 +29,68 @@
     </div>
 
     <ion-list>
-        <ion-item class="item item-icon-right uppercase" ng-click="show('information')">
+        <ion-item class="item item-icon-right uppercase" ng-click="toggleGroup('information')">
           <h3>Livsmedelsinformation</h3>
-          <i class="icon" ng-class="(accordion.information == 1) ? 'ion-ios7-arrow-up' : 'ion-ios7-arrow-down'"></i>
+          <i class="icon ion-ios7-arrow-down accordion-icon" ng-class="isGroupShown('information') ? 'open' : ''"></i>
         </ion-item>
-        <ion-item class="row item item-energized accordion-content center" ng-show="accordion.information === 1">
-        <div class="col" ng-show="item.dabas.weight"><div class="info-text uppercase">Vikt (kg)</div><div class="uppercase numbers text-overflow">{{ item.dabas.weight/1000 }}</div></div>
-        <div class="col" ng-show="item.dabas.country"><div class="info-text uppercase">Land</div><div class="uppercase text-overflow">{{ item.dabas.country }}</div></div>
-        <div class="col" bg-show="item.dabas.producer"><div class="info-text uppercase">Tillverkare</div><div class="uppercase text-overflow">{{ item.dabas.producer }}</div></div>
-        </ion-item>
+        <div collapse="isGroupShown('information') == false">
+          <ion-item class="row item-energized accordion-content center">
+            <div class="col" ng-show="item.dabas.weight">
+              <div class="info-text uppercase">Vikt (kg)</div>
+              <div class="uppercase numbers text-overflow">{{ item.dabas.weight/1000 }}</div>
+            </div>
+            <div class="col" ng-show="item.dabas.country">
+              <div class="info-text uppercase">Land</div>
+              <div class="uppercase text-overflow">{{ item.dabas.country }}</div>
+            </div>
+            <div class="col" bg-show="item.dabas.producer">
+              <div class="info-text uppercase">Tillverkare</div>
+              <div class="uppercase text-overflow">{{ item.dabas.producer }}</div>
+            </div>
+          </ion-item>
         </div>
-        <ion-item class="item item-icon-right uppercase" ng-show="item.dabas.ingredients.length > 0" ng-click="show('ingredients')">
+        <ion-item class="item item-icon-right uppercase" ng-show="item.dabas.ingredients.length > 0" ng-click="toggleGroup('ingredients')">
           <h3>Ingredienser</h3>
-          <i class="icon" ng-class="(accordion.ingredients == 1) ? 'ion-ios7-arrow-up' : 'ion-ios7-arrow-down'"></i>
+          <i class="icon ion-ios7-arrow-down accordion-icon" ng-class="isGroupShown('ingredients') ? 'open' : ''"></i>
         </ion-item>
-        <ion-item class="item item-energized accordion-content" ng-show="accordion.ingredients === 1">
+        <ion-item class="item item-energized accordion-content" collapse="isGroupShown('ingredients') == false">
           <div class="row" ng-repeat="ingredient in item.dabas.ingredients">
             <div class="col">{{ ingredient.name }}</div>
             <div ng-show="ingredient.carbon" class="col">{{ ingredient.carbon }} CO<sub>2</sub> per gram</div>
           </div>
         </ion-item>
-        <ion-item class="item item-icon-right uppercase" ng-click="show('carbon')">
+
+        <ion-item class="item item-icon-right uppercase" ng-click="toggleGroup('carbon')">
           <h3>Koldioxidinformation</h3>
-          <i class="icon" ng-class="(accordion.carbon == 1) ? 'ion-ios7-arrow-up' : 'ion-ios7-arrow-down'"></i>
+          <i class="icon ion-ios7-arrow-down accordion-icon" ng-class="isGroupShown('carbon') ? 'open' : ''"></i>
         </ion-item>
-        <ion-item class="item item-energized accordion-content long-text" ng-show="accordion.carbon === 1">
+        <ion-item class="item item-energized accordion-content long-text" collapse="isGroupShown('carbon') == false">
           <div>Koldioxidvärdet som visas är en uppskattning och ska inte ses som ett exakt värde, utan snarare som en fingervisning. All koldioxiddata är hämtad från LCAFDB (Life Cycle Assesment Food Database). Finns inte det specifika livsmedlet i LCAFDB visas istället koldioxidutsläppet för det aktuella livsmedlets kategori.</div><br/>
-          <div>För mer info besök <a href="http://lcafdb.org">LCAFDB</a>.</diV>
+          <div>För mer info besök <a href="http://lcafdb.org" targer="_blank">LCAFDB</a>.</diV>
         </ion-item>
-        <ion-item class="item item-icon-right uppercase" ng-show="item.dabas.labels.length > 0" ng-click="show('labels')">
+
+        <ion-item class="item item-icon-right uppercase" ng-show="item.dabas.labels.length > 0" ng-click="toggleGroup('labels')">
           <h3>Miljömärkningar</h3>
-          <i class="icon" ng-class="(accordion.labels == 1) ? 'ion-ios7-arrow-up' : 'ion-ios7-arrow-down'"></i>
-        </ion-item>
-        <div class="accordion-content" ng-show="accordion.labels === 1">              
-              <div ng-repeat="label in item.dabas.labels" class="item item-thumbnail-left item-text-wrap">
-                <img src="img/{{label.Typkod}}.png" />
-                <h2>{{label.Typ}}</h2>
-                <h4>{{label.desc}}</h4>
-              </div>     
+          <i class="icon ion-ios7-arrow-down accordion-icon" ng-class="isGroupShown('labels') ? 'open' : ''"></i>
+        </ion-item> 
+        <div class="accordion-content" collapse="isGroupShown('labels') == false">         
+          <ion-item ng-repeat="label in item.dabas.labels" class="item item-thumbnail-left item-text-wrap">
+            <img src="img/{{label.Typkod}}.png" />
+            <h2>{{label.Typ}}</h2>
+            <div class="label-desc">{{label.desc}}</div>
+          </ion-item>  
         </div>
-        <ion-item class="item item-icon-right uppercase" ng-click="show('categories')">
+
+        <ion-item class="item item-icon-right uppercase" ng-click="toggleGroup('related')" ng-show="relatedArticles.length > 0">
           <h3>Relaterade artiklar</h3>
-          <i class="icon" ng-class="(accordion.categories == 1) ? 'ion-ios7-arrow-up' : 'ion-ios7-arrow-down'"></i>
+          <i class="icon ion-ios7-arrow-down accordion-icon" ng-class="isGroupShown('related') ? 'open' : ''"></i>
         </ion-item>
-        <div class="accordion-content" ng-show="accordion.categories === 1">
-            <ion-item ng-click="article.goto({{relatedArticle.dabas.GTIN}})" ng-repeat="relatedArticle in relatedArticles" ng-show="relatedArticle.dabas.GTIN != item.dabas.GTIN" ng-class="relatedArticle.dabas.images[0].Lank ? 'item-avatar' : ''" class="item">
-                <img ng-show="relatedArticle.dabas.images[0].Lank" ng-src="{{relatedArticle.dabas.images[0].Lank}}"/>
-                <h2>{{ relatedArticle.dabas.name }}</h2>
-                <p><strong>{{ relatedArticle.dabas.producer }}</strong> {{ relatedArticle.dabas.country }}</p>
-            </ion-item>
+        <div class="accordion-content" collapse="isGroupShown('related') == false">         
+          <ion-item ng-click="article.goto({{relatedArticle.dabas.GTIN}})" ng-repeat="relatedArticle in relatedArticles" ng-show="relatedArticle.dabas.GTIN != item.dabas.GTIN" ng-class="relatedArticle.dabas.images[0].Lank ? 'item-avatar' : ''" class="item">
+              <img ng-show="relatedArticle.dabas.images[0].Lank" ng-src="{{relatedArticle.dabas.images[0].Lank}}"/>
+              <h2 class="uppercase">{{ relatedArticle.dabas.name }}</h2>
+              <p><span class="label">{{ relatedArticle.dabas.producer }}</span> {{ relatedArticle.dabas.country }}</p>
+          </ion-item>
         </div>
     </ion-list>
   </ion-content>
