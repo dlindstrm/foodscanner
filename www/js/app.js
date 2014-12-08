@@ -85,6 +85,7 @@ angular.module('foodscan', ['ionic', 'ngCordova', 'underscore', 'ui.unique', 'fo
 })
 
 .constant('$ionicLoadingConfig', {
-  template: 'Default Loading Template...'
+  template: 'Laddar<span class="dots"><span class="dot1"> .</span><span class="dot2"> .</span><span class="dot3"> .</span></span>',
+  noBackdrop: false 
 });
 
