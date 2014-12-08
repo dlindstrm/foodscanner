@@ -57,8 +57,8 @@ h1, h2, h3, h4, h5, h6, .label {
 }
 .navigation .item {
 	padding: 10px;
-	border-color: #1fbd8b !important;
-	background-color: #48e1b2 !important;
+	border-color: #1f9b6d !important;
+	background-color: #30D69B !important;
 	color: #fff !important;
 }
 .nav-button.button.button-icon:before {
@@ -118,24 +118,56 @@ ion-view > .bar-subheader {
 /**
  * Start
  */
-.start {
-	background: #f5f5f5;
-}
 .start .scroll {
-	height: 99% !important;
+	height: 100% !important;
+}
+.start .content {
+	height: 50%;
 }
 .button.start-item {
-	min-height: 150px;
-	height: 25%;
+	min-height: 100px;
+	height: 50%;
 	margin: 0;
-	border-top-width: 0;
-	border-right-width: 0;
-	border-left-width: 0;
-	border-bottom-width: 0;
+	border: 0 !important;
+	color: #fcfcfc;
+	text-transform: none !important;
+	font-size: 24px;
+}
+.button.scan,
+.start .content-top {
+	background: #30D69B;
+}
+.button.search {
+	background: #22996E;
+}
+.button.browse {
+	background: #186B4D;
+}
+.button.favorites,
+.start .content-bottom {
+	background: #114A35;
+}
+.button.start-item .button-content {
+	width: 170px;
+	margin: 0 auto;
+	text-align: left;
+}
+.button.start-item .button-content div {
+	display: inline-block;
+}
+.start-item .start-icon {
+	border: 1px solid #fcfcfc;
+	border-radius: 50%;
+	height: 50px;
+	width: 50px;
+	margin-right: 10px;
+	text-align: center;
 }
 .button.start-item i:before {
-	font-size: 50px;
-	color: #40cda2;
+	line-height: 50px;
+	font-size: 30px;
+	margin: 0;
+	padding: 0;
 }
 /**
  * Search
@@ -168,7 +200,7 @@ ion-view > .bar-subheader {
 	border-bottom:1px solid #FFF;
 }
 .item-radio input:checked ~ .item-content {
-	background: #48e1b2;
+	background: #30D69B;
 	color: #fff;
 }
 .item-radio input:checked ~ .icon {
