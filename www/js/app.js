@@ -89,3 +89,4 @@ angular.module('foodscan', ['ionic', 'ngCordova', 'underscore', 'ui.unique', 'ui
   noBackdrop: false 
 });
 
+
