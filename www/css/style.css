@@ -118,23 +118,26 @@ ion-view > .bar-subheader {
 /**
  * Start
  */
+.start {
+	background-image: linear-gradient(bottom, #114A35 50%, #30D69B 50%);
+	background-image: -o-linear-gradient(bottom, #114A35 50%, #30D69B 50%);
+	background-image: -moz-linear-gradient(bottom, #114A35 50%, #30D69B 50%);
+	background-image: -webkit-linear-gradient(bottom, #114A35 50%, #30D69B 50%);
+	background-image: -ms-linear-gradient(bottom, #114A35 50%, #30D69B 50%);
+}
 .start .scroll {
 	height: 100% !important;
 }
-.start .content {
-	height: 50%;
-}
 .button.start-item {
 	min-height: 100px;
-	height: 50%;
+	height: 25%;
 	margin: 0;
 	border: 0 !important;
 	color: #fcfcfc;
 	text-transform: none !important;
 	font-size: 24px;
 }
-.button.scan,
-.start .content-top {
+.button.scan {
 	background: #30D69B;
 }
 .button.search {
@@ -143,8 +146,7 @@ ion-view > .bar-subheader {
 .button.browse {
 	background: #186B4D;
 }
-.button.favorites,
-.start .content-bottom {
+.button.favorites {
 	background: #114A35;
 }
 .button.start-item .button-content {
@@ -172,14 +174,26 @@ ion-view > .bar-subheader {
 /**
  * Search
  */
-.item-input-wrapper {
+.bar-search .item-input-wrapper {
 	background: #fff;
+	border-radius: 0px;
+}
+.platform-ios .bar-search .item-input-wrapper {
+	border-radius: 4px;
 }
 .platform-ios .bar-search input,
 .platform-ios .bar-search .button {
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	text-transform: none !important;
 	font-weight: normal !important;
+}
+.platform-android .bar-search .button.button-clear {
+	padding:0px 8px;
+	font-size: 12px;
+	font-weight: 700 !important;
+	text-transform: uppercase !important;
+	background-color: #30D69B !important;
+	border-width: 0px;
 }
 .item.clear-history h3 {
 	color: #ce6162 !important;

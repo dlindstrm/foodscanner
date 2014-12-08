@@ -1,6 +1,5 @@
 <ion-view hide-nav-bar="true" hide-back-button="true">
   <ion-content class="start">    
-    <div class="content content-top">
     <button class="button button-large button-full border-bottom start-item scan" ng-controller="ScanController as scan" ng-click="scanBarcode()">
       <div class="button-content">
         <div class="start-icon"><i class="icon ion-ios7-barcode-outline"></i></div>
@@ -13,8 +12,6 @@
         <div>Sök</div>
       </div>
      </button>
-    </div>
-    <div class="content content-bottom">
     <button ng-click="nav.navigateTo('/app/browse')" class="button button-large button-full border-bottom start-item browse">
       <div class="button-content">
         <div class="start-icon"><i class="icon ion-ios7-albums-outline"></i></div>
@@ -27,6 +24,5 @@
         <div>Favoriter</div>
       </div>
     </button>
-    </div>
   </ion-content>
 </ion-view>
