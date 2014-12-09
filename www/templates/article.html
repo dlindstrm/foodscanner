@@ -67,7 +67,7 @@
         </ion-item>
         <ion-item class="item item-energized accordion-content long-text" collapse="isGroupShown('carbon') == false">
           <div>Koldioxidvärdet som visas är en uppskattning och ska inte ses som ett exakt värde, utan snarare som en fingervisning. All koldioxiddata är hämtad från LCAFDB (Life Cycle Assesment Food Database). Finns inte det specifika livsmedlet i LCAFDB visas istället koldioxidutsläppet för det aktuella livsmedlets kategori.</div><br/>
-          <div>För mer info besök <a href="http://lcafdb.org" targer="_blank">LCAFDB</a>.</diV>
+          <div>För mer info besök <span class="link-text" ng-click="gotoExternal('http://lcafdb.org')">LCAFDB</span>.</diV>
         </ion-item>
 
         <ion-item class="item item-icon-right uppercase" ng-show="item.dabas.labels.length > 0" ng-click="toggleGroup('labels')">

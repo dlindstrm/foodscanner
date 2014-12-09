@@ -1,7 +1,7 @@
 angular.module('foodscan.articleController', [])
 
 
-.controller("ArticleController", function($stateParams, $scope, $http, $ionicLoading, $timeout, $ionicNavBarDelegate, $ionicScrollDelegate, Articles, Favorite) {
+.controller("ArticleController", function($stateParams, $scope, $http, $ionicLoading, $timeout, $ionicNavBarDelegate, $ionicScrollDelegate, Articles, Favorite, ExternalLink) {
 
   Articles.getArticle($stateParams.gtin, function(error, data) {
     if(error !== null) {
@@ -74,5 +74,9 @@ if($scope.item.productgroup) {
 }
 this.goto = function(gtin) {
    Articles.goTo(gtin);
+}
+
+$scope.gotoExternal = function(link) {
+  ExternalLink.goTo(link);
 }
 });

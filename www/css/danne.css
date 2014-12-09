@@ -32,12 +32,12 @@
 	font-size: 13px;
 }
 
-.accordion-content.item-energized a,
-.accordion-content.item-energized a:visited,
-.accordion-content.item-energized a:focus {
+
+.accordion-content.item-energized span.link-text {
 	color: #fff !important;
 	text-decoration: none;
 	font-weight: 800;
+  cursor: pointer;
 }
 .long-text {
 	white-space: normal !important;
