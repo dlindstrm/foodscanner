@@ -92,6 +92,9 @@ angular.module('foodscan.searchController', [])
         onTap: function(e) {
           $scope.previousSearches = [];
           window.localStorage.removeItem("previous_searches");
+          $timeout(function() {
+            $ionicScrollDelegate.resize();
+          }, 150);
         }
       }
     ]

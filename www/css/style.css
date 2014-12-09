@@ -119,14 +119,18 @@ ion-view > .bar-subheader {
  * Start
  */
 .start {
+	background-color: #30D69B;
 	background-image: linear-gradient(bottom, #114A35 50%, #30D69B 50%);
 	background-image: -o-linear-gradient(bottom, #114A35 50%, #30D69B 50%);
 	background-image: -moz-linear-gradient(bottom, #114A35 50%, #30D69B 50%);
 	background-image: -webkit-linear-gradient(bottom, #114A35 50%, #30D69B 50%);
 	background-image: -ms-linear-gradient(bottom, #114A35 50%, #30D69B 50%);
 }
+.start .scroll-content {
+	top: 19px !important;
+}
 .start .scroll {
-	height: 100% !important;
+	height: 99% !important;
 }
 .button.start-item {
 	min-height: 100px;

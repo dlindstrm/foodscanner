@@ -129,7 +129,7 @@ angular.module('foodscan.articleListController', [])
     else {
       $scope.accordion[property] = true;
     }
-    $timeout(function () {
+    $timeout(function() {
       $ionicScrollDelegate.resize();
     }, 150);
   };
@@ -142,6 +142,12 @@ angular.module('foodscan.articleListController', [])
    */
   getCategories = function() {
     var data = ArticleList.getOriginal();
+    data = _.filter(data, function(obj) {
+      return obj.dabas.productcode !== null;
+    })
+    data = _.filter(data, function(obj) {
+      return obj.dabas.productcode.length > 1;
+    })
     var unique = _.filter(data, function(obj) {
       return "vendingGroup" in obj.productgroup === true;
     });

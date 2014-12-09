@@ -1,6 +1,6 @@
 angular.module('foodscan.navigationController', [])
 
-.controller("NavigationController", function($scope, $location, $ionicPopover, $ionicNavBarDelegate, $timeout) { 
+.controller("NavigationController", function($scope, $location, $ionicPopover, $ionicNavBarDelegate, $timeout, $ionicViewService) { 
 
   /**
    * Popover for the navigation
@@ -66,7 +66,7 @@ angular.module('foodscan.navigationController', [])
       angular.element(document.querySelector('body')).addClass('no-nav-animation');
       $timeout(function() {
         angular.element(document.querySelector('body')).removeClass('no-nav-animation');
-      }, 400)
+      }, 400);
       $location.path(path);
     }
   } 
@@ -77,6 +77,9 @@ angular.module('foodscan.navigationController', [])
     $timeout(function() {
       angular.element(document.querySelector('body')).removeClass('no-nav-animation');
     }, 400)
-    $ionicNavBarDelegate.back(); 
+    $ionicNavBarDelegate.back();
+    if($location.path() == "/app/start") {
+        $ionicViewService.clearHistory();
+    } 
   }
 })
