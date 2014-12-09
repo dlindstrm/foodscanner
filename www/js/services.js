@@ -119,13 +119,6 @@ angular.module('foodscan.services', [])
       $ionicLoading.show();
       $http.get(url)
       .success(function(data, status) {
-        data = _.filter(data, function(obj) {
-          return obj.dabas.productcode !== null;
-        })
-        data = _.filter(data, function(obj) {
-          return obj.dabas.productcode.length > 1;
-        })
-
         original = data;
         window.localStorage.setItem('original', JSON.stringify(original));
         $location.path("/app/articlelist");
