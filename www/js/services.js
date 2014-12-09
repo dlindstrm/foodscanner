@@ -179,8 +179,14 @@ angular.module('foodscan.services', [])
           return false;
         }
       }
+    }  
+  }
+})
 
+.factory('ExternalLink', function() {
+  return {
+    goTo: function(link) {
+      window.open(link, '_blank', 'location=yes');
     }
-  
-}
+  }
 });
