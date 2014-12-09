@@ -179,7 +179,7 @@ angular.module('foodscan.services', [])
 .factory('ExternalLink', function() {
   return {
     goTo: function(link) {
-      window.open(link, '_blank', 'location=yes');
+      window.open(link, '_system', 'location=yes');
     }
   }
 });
