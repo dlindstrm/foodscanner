@@ -1,9 +1,13 @@
 <ion-view hide-nav-bar="true" ng-controller="SearchController as search">
 <ion-header-bar class="bar bar-dark bar-header item-input-inset bar-search">
- 	<label class="item-input-wrapper">
+ 	  <div class="item-input-wrapper">
     	<i class="icon ion-ios7-search placeholder-icon"></i>
-    	<input ng-model="search.searchInput" ng-change="search.change()" type="search" placeholder="Sök artikel">
-  	</label>
+      <form ng-submit="search.closeKeyboard()" class="search-form">
+        <input ng-model="search.searchInput" ng-change="search.change()" type="search" placeholder="Sök artikel" id="searchinput">
+        <input type="submit" value="Sök" class="ng-hide">
+      </form>
+      <i class="clear-search icon ion-ios7-close" ng-click="search.setInput('')"></i>
+  	</div>
   	<button class="button button-clear" ng-click="search.cancel()">
     	Avbryt
   	</button>
@@ -41,7 +45,7 @@
   <h3 class="uppercase">Sök</h3>
   <p>Sök efter artiklar du vill veta koldioxidutsläppet om.</p>
   </div>
-  <p class="center padding-top padding-left padding-right padding-bottom" ng-show="noResult === true">Inga resultat. Vänligen försök igen.</p>
+  <p class="center padding-top padding-left padding-right padding-bottom" ng-show="noResult === true && noArticles == false">Inga resultat. Vänligen försök igen.</p>
   <div class="center padding-top padding-left padding-right padding-bottom" ng-show="loader === true">
     <i class="icon ion-loading-c"></i>
   </div>

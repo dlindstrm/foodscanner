@@ -3,12 +3,14 @@ angular.module('foodscan.articleController', [])
 
 .controller("ArticleController", function($stateParams, $scope, $http, $ionicLoading, $timeout, $ionicNavBarDelegate, $ionicScrollDelegate, Articles, Favorite, ExternalLink) {
 
+  $scope.relatedArticles = [];
   Articles.getArticle($stateParams.gtin, function(error, data) {
     if(error !== null) {
       $ionicNavBarDelegate.back();
     }
     $ionicLoading.hide();
     $scope.item = data;
+    $scope.relatedArticles = $scope.item.related;
   });
 
   $scope.accordion = {
@@ -18,7 +20,7 @@ angular.module('foodscan.articleController', [])
     labels: false,
     categories: false
   }
-  
+
   $scope.toggleGroup = function(property) {
     if ($scope.isGroupShown(property)) {
       $scope.accordion[property] = false;
@@ -39,44 +41,11 @@ angular.module('foodscan.articleController', [])
     $scope.favorite = Favorite.toggleFavorite(id, title, producer, country, img);
   }
 
-  $scope.relatedArticles = [];
-
-  related = function(cat1, cat2, cat3) {
-  var url = 'http://fsserver.kspri.se/api/get/article?limit=5&cat1=';
-  
-  if(cat1 == undefined) {
-    $scope.relatedArticles = [];
+  this.goto = function(gtin) {
+     Articles.goTo(gtin);
   }
 
-  else if(cat2 == undefined) {
-    $http.get(url+cat1.no)
-      .success(function(data, status) {
-            $scope.relatedArticles = data;
-      });
+  $scope.gotoExternal = function(link) {
+    ExternalLink.goTo(link);
   }
-
-  else if(cat3 == undefined) {
-    $http.get(url+cat1.no+'&cat2='+cat2.no)
-      .success(function(data, status) {
-            $scope.relatedArticles = data;
-      });
-  }
-
-  else {
-    $http.get(url+cat1.no+'&cat2='+cat2.no+'&cat3='+cat3.no)
-      .success(function(data, status) {
-            $scope.relatedArticles = data;
-    });
-  }
-}
-if($scope.item.productgroup) {
-  related($scope.item.productgroup.vendingArea,$scope.item.productgroup.majorGroup,$scope.item.productgroup.vendingGroup);
-}
-this.goto = function(gtin) {
-   Articles.goTo(gtin);
-}
-
-$scope.gotoExternal = function(link) {
-  ExternalLink.goTo(link);
-}
 });

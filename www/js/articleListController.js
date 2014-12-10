@@ -1,17 +1,20 @@
 angular.module('foodscan.articleListController', [])
 
 .controller("ArticleListController", function($scope, $http, $stateParams, $timeout, $ionicModal, $ionicPopover, $ionicScrollDelegate, Articles, ArticleList) {
-  $scope.catFilter = [];
-  $scope.producerFilter = [];
-  $scope.countryFilter = [];
+  $scope.loader = false;
   $scope.sort = '';
-  ArticleList.set(ArticleList.getOriginal());
+  $scope.itemsPerPage = 20;
 
   setArticles = function() {
-    $scope.itemsPerPage = 20;
-    $scope.currentPage = 0;
+    $scope.currentPage = sessionStorage.getItem('currentpage') || 0;
     $scope.total = ArticleList.total();
-    $scope.articles = ArticleList.get($scope.currentPage*$scope.itemsPerPage, $scope.itemsPerPage);
+    if($scope.currentPage > 1) {
+      console.log($scope.currentPage)
+      $scope.articles = ArticleList.getMany($scope.currentPage*$scope.itemsPerPage);
+    }
+    else {
+      $scope.articles = ArticleList.get($scope.currentPage*$scope.itemsPerPage, $scope.itemsPerPage);
+    }
     $scope.noResult = ($scope.articles.length < 1) ? true : false;
   }
 
@@ -19,6 +22,7 @@ angular.module('foodscan.articleListController', [])
     $scope.loader = true;
     $timeout(function() {
       $scope.currentPage++;
+      sessionStorage.setItem('currentpage', $scope.currentPage);
       var newItems = ArticleList.get($scope.currentPage*$scope.itemsPerPage, $scope.itemsPerPage);
       $scope.articles = $scope.articles.concat(newItems);
       $scope.loader = false;
@@ -46,44 +50,36 @@ angular.module('foodscan.articleListController', [])
   filter = function() {
     var articles = ArticleList.getOriginal();
     if($scope.sort.property !== 'ng') {
-      $scope.sortActive = true;
       articles = _.sortBy(articles, function(obj){ return obj.dabas[$scope.sort.property]; });
     }
-    else {
-      $scope.sortActive = false;
-    }
+
     if($scope.catFilter.length !== 0) {
-      $scope.catActive = true;
       articles = _.filter(articles, function(obj){
-        if(obj.productgroup.vendingGroup) 
-          return $scope.catFilter.indexOf(obj.productgroup.vendingGroup.article) !== -1; 
-        else 
-          return false;
+        if(obj.productgroup) {
+          if(obj.productgroup.vendingGroup) {
+            return $scope.catFilter.indexOf(obj.productgroup.vendingGroup.article) !== -1; 
+          }
+        }
       });
     }
-    else {
-      $scope.catActive = false;
-    }
+
     if($scope.producerFilter.length !== 0) {
-      $scope.producerActive = true;
       articles = _.filter(articles, function(obj){ return $scope.producerFilter.indexOf(obj.dabas.producer) !== -1; });
     }
-    else {
-      $scope.producerActive = false;
-    }
+
     if($scope.countryFilter.length !== 0) {
-      $scope.countryActive = true;
       articles = _.filter(articles, function(obj){ return $scope.countryFilter.indexOf(obj.dabas.country) !== -1; });
     }
-    else {
-      $scope.countryActive = false;
-    }
+
     ArticleList.set(articles);
     setArticles();
   }
 
   $scope.applyCategories = function() {
     $scope.closeModal(1);
+
+    sessionStorage.setItem('categories', JSON.stringify($scope.categories));
+
     var checked = _.filter($scope.categories, function(item) {
       return item.checked === true;
     });
@@ -91,11 +87,15 @@ angular.module('foodscan.articleListController', [])
     for(var i = 0; i<checked.length; i++) {
       $scope.catFilter.push(checked[i].article);
     }
+    sessionStorage.setItem('catFilter', JSON.stringify($scope.catFilter));
     filter();
   }
 
   $scope.applyFilters = function() {
     $scope.closeModal(2);
+
+    sessionStorage.setItem('producers', JSON.stringify($scope.producers));
+    sessionStorage.setItem('countries', JSON.stringify($scope.countries));
 
     /// Producer filter
     var checked = _.filter($scope.producers, function(item) {
@@ -105,6 +105,8 @@ angular.module('foodscan.articleListController', [])
     for(var i = 0; i<checked.length; i++) {
       $scope.producerFilter.push(checked[i].name);
     }
+    sessionStorage.setItem('producerFilter', JSON.stringify($scope.producerFilter));
+
 
     /// Country filter
     var checked = _.filter($scope.countries, function(item) {
@@ -114,6 +116,7 @@ angular.module('foodscan.articleListController', [])
     for(var i = 0; i<checked.length; i++) {
       $scope.countryFilter.push(checked[i].name);
     }
+    sessionStorage.setItem('countryFilter', JSON.stringify($scope.countryFilter));
 
     filter();
   }
@@ -156,6 +159,7 @@ angular.module('foodscan.articleListController', [])
     });
     unique = _.pluck(unique, 'productgroup');
     $scope.categories = _.pluck(unique, 'vendingGroup');
+    sessionStorage.setItem('categories', JSON.stringify($scope.categories));
   }
 
   getProducers = function() {
@@ -163,18 +167,25 @@ angular.module('foodscan.articleListController', [])
     var unique = _.uniq(data, function(item, key, producer) {
       return item.dabas.producer;
     });
+    unique = _.filter(unique, function(obj) {
+      return obj.dabas.producer !== null;
+    });
     unique = _.pluck(unique, 'dabas');
     unique = _.pluck(unique, 'producer');
     $scope.producers = [];
     for(var i = 0; i<unique.length; i++) {
       $scope.producers.push({name: unique[i]});
     }
+    sessionStorage.setItem('producers', JSON.stringify($scope.producers));
   }
 
   getCountries = function() {
     var data = ArticleList.getOriginal();
     var unique = _.uniq(data, function(item, key, country) {
       return item.dabas.country;
+    });
+    unique = _.filter(unique, function(obj) {
+      return obj.dabas.country !== null;
     });
     unique = _.pluck(unique, 'dabas');
     unique = _.pluck(unique, 'country');
@@ -183,13 +194,45 @@ angular.module('foodscan.articleListController', [])
       if(unique[i] !== "")
         $scope.countries.push({name: unique[i]});
     }
+    sessionStorage.setItem('countries', JSON.stringify($scope.countries));
   }
 
   init = function() {
-    setArticles();
-    getCategories();
-    getProducers();
-    getCountries();
+    if(JSON.parse(sessionStorage.getItem("newList")) == true) {
+      sessionStorage.setItem("newList", false);
+      sessionStorage.removeItem('catFilter');
+      sessionStorage.removeItem('producerFilter');
+      sessionStorage.removeItem('countryFilter');
+      sessionStorage.removeItem('currentpage')
+      
+      $scope.sort = {
+        property: 'ng'
+      };
+
+      $scope.catFilter = [];
+      $scope.producerFilter = [];
+      $scope.countryFilter = [];
+      ArticleList.set(ArticleList.getOriginal());
+      setArticles();
+      getCategories();
+      getProducers();
+      getCountries();
+    }
+    else {
+      setArticles();
+
+      $scope.sort = {
+        property: (sessionStorage.getItem("sortproperty") || 'ng')
+      };
+
+      $scope.categories = JSON.parse(sessionStorage.getItem("categories"));
+      $scope.producers = JSON.parse(sessionStorage.getItem("producers"));
+      $scope.countries = JSON.parse(sessionStorage.getItem("countries"));
+
+      $scope.catFilter = JSON.parse(sessionStorage.getItem("catFilter")) || [];
+      $scope.producerFilter = JSON.parse(sessionStorage.getItem("producerFilter")) || [];
+      $scope.countryFilter = JSON.parse(sessionStorage.getItem("countryFilter")) || [];
+    }
   }
   $timeout(init);
 
@@ -244,11 +287,9 @@ angular.module('foodscan.articleListController', [])
     $scope.oModal3.remove();
   });
   
-  $scope.sort = {
-    property: 'ng'
-  };
   $scope.applySort = function(property) {
     $scope.closeModal(3);
+    sessionStorage.setItem("sortproperty", $scope.sort.property);
     filter();
   };
 });

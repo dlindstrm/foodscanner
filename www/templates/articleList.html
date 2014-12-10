@@ -5,17 +5,17 @@
   <div class="bar bar-calm bar-subheader row filters">
       <div class="col">
         <div class="button button-block button-dark" ng-click="openModal(1)">
-          <span ng-class="catActive == true ? 'underline' : ''">Kategorier</span>
+          <span ng-class="catFilter.length > 0 ? 'underline' : ''">Kategorier</span>
         </div>
       </div>
       <div class="col no-padding-sides">
         <div class="button button-block button-positive" ng-click="openModal(2)">
-          <span ng-class="(countryActive == true || producerActive == true) ? 'underline' : ''">Filtrera</span>
+          <span ng-class="(countryFilter.length > 0 || producerFilter.length > 0) ? 'underline' : ''">Filtrera</span>
         </div>
       </div>
       <div class="col">
         <div class="button button-block button-balanced" ng-click="openModal(3)">
-          <span ng-class="sortActive == true ? 'underline' : ''">Sortera</span>
+          <span ng-class="sort.property !== 'ng' ? 'underline' : ''">Sortera</span>
         </div>
       </div>
   </div>

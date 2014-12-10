@@ -30,13 +30,15 @@ angular.module('foodscan.navigationController', [])
   };
   // Execute action on hide popover
   $scope.$on('popover.hidden', function() {
-    $scope.isOpened = false;
-    angular.element(document.querySelector('.navigation').parentNode.parentNode).addClass("hiding")
-    angular.element(document.querySelector('ion-view > ion-content')).removeClass("blur");
-    angular.element(document.querySelector('ion-view > .bar-subheader')).removeClass("blur");
-    $timeout(function() {
-      angular.element(document.querySelector('.navigation').parentNode.parentNode).removeClass("hiding");
-    }, 400)
+    if(document.querySelector('.navigation')) {
+      $scope.isOpened = false;
+      angular.element(document.querySelector('.navigation').parentNode.parentNode).addClass("hiding")
+      angular.element(document.querySelector('ion-view > ion-content')).removeClass("blur");
+      angular.element(document.querySelector('ion-view > .bar-subheader')).removeClass("blur");
+      $timeout(function() {
+        angular.element(document.querySelector('.navigation').parentNode.parentNode).removeClass("hiding");
+      }, 400);
+    };
   });
   // Execute action on remove popover
   $scope.$on('popover.removed', function() {

@@ -4,6 +4,12 @@ angular.module('foodscan.searchController', [])
   
   $scope.noArticles = true;
   $scope.previousSearches = JSON.parse(window.localStorage.getItem('previous_searches'));
+
+  //Focus searchbar onload
+  $timeout(function() {
+    document.getElementById("searchinput").focus();
+  }, 150);
+
   this.change = function() {
     search(this.searchInput.toString());
   }
@@ -67,13 +73,16 @@ angular.module('foodscan.searchController', [])
   }
 
   this.showAll = function() {
-    console.log("hej")
     ArticleList.goTo('http://fsserver.kspri.se/api/get/article?search='+this.searchInput);
   }
 
   this.setInput = function(key) {
     this.searchInput = key;
     search(key);
+  }
+
+  this.closeKeyboard = function() {
+    cordova.plugins.Keyboard.close();
   }
 
   this.clearPrevious = function() {

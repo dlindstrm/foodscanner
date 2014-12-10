@@ -3,7 +3,6 @@
 /**
  * Layout/Style
  */
-
 body, .ionic-body {
 	font-weight: 500;
 }
@@ -182,6 +181,9 @@ ion-view > .bar-subheader {
 	background: #fff;
 	border-radius: 0px;
 }
+.bar-search .search-form {
+	width: 100%;
+}
 .platform-ios .bar-search .item-input-wrapper {
 	border-radius: 4px;
 }
@@ -198,6 +200,10 @@ ion-view > .bar-subheader {
 	text-transform: uppercase !important;
 	background-color: #30D69B !important;
 	border-width: 0px;
+}
+.clear-search {
+  font-size: 16px;
+  color:#aaa;
 }
 .item.clear-history h3 {
 	color: #ce6162 !important;
