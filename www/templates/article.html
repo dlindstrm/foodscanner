@@ -76,7 +76,7 @@
         </ion-item> 
         <div class="accordion-content" collapse="isGroupShown('labels') == false">         
           <ion-item ng-repeat="label in item.dabas.labels" class="item item-thumbnail-left item-text-wrap">
-            <img src="img/{{label.Typkod}}.png" />
+            <img src="img/{{label.Typkod}}.png"/>
             <h2>{{label.Typ}}</h2>
             <div class="label-desc">{{label.desc}}</div>
           </ion-item>  
@@ -88,7 +88,9 @@
         </ion-item>
         <div class="accordion-content" collapse="isGroupShown('related') == false">         
           <ion-item ng-click="article.goto({{relatedArticle.dabas.GTIN}})" ng-repeat="relatedArticle in relatedArticles" ng-show="relatedArticle.dabas.GTIN != item.dabas.GTIN" ng-class="relatedArticle.dabas.images[0].Lank ? 'item-avatar' : ''" class="item">
-              <img ng-show="relatedArticle.dabas.images[0].Lank" ng-src="{{relatedArticle.dabas.images[0].Lank}}"/>
+              <div class="item-image-avatar" ng-show="relatedArticle.dabas.images[0].Lank">
+                <img ng-src="{{relatedArticle.dabas.images[0].Lank}}"/>
+              </div>  
               <h2 class="uppercase">{{ relatedArticle.dabas.name }}</h2>
               <p><span class="label">{{ relatedArticle.dabas.producer }}</span> {{ relatedArticle.dabas.country }}</p>
           </ion-item>

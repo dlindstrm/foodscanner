@@ -6,7 +6,9 @@
    <div ng-show="favs.length > 0">
   	<ion-list>
   		<ion-item ng-click="favorite.goto({{fav.id}})" ng-repeat="fav in favs" ng-class="fav.img ? 'item-avatar' : ''" class="item">
-	        <img ng-show="fav.img" ng-src="{{fav.img}}"/>
+          <div class="item-image-avatar" ng-show="fav.img">
+            <img ng-src="{{fav.img}}"/>
+          </div>
 	  			<h2 class="uppercase">{{ fav.title }}</h2>
 	        <p><strong>{{ fav.producer }}</strong> {{ fav.country }}</p>
 	        <ion-option-button class="button-assertive" ng-click="toggleFav({{fav.id}})"><span>Ta bort</span></ion-option-button>

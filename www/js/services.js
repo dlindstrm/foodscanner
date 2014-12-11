@@ -95,10 +95,10 @@ angular.module('foodscan.services', [])
       })
       .error(function(status, data) {
         $ionicLoading.hide();
-         $ionicPopup.alert({
-           title: 'Serverfel',
-           template: 'Ingen uppkoppling mot servern.'
-         });
+        $ionicPopup.alert({
+          title: 'Ingen artikel hittades',
+          template: 'Artikeln du skannade hittades inte.'
+        });
       });
     },
 

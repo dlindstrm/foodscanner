@@ -9,7 +9,6 @@ angular.module('foodscan.articleListController', [])
     $scope.currentPage = sessionStorage.getItem('currentpage') || 0;
     $scope.total = ArticleList.total();
     if($scope.currentPage > 1) {
-      console.log($scope.currentPage)
       $scope.articles = ArticleList.getMany($scope.currentPage*$scope.itemsPerPage);
     }
     else {
@@ -219,7 +218,6 @@ angular.module('foodscan.articleListController', [])
       getCountries();
     }
     else {
-      setArticles();
 
       $scope.sort = {
         property: (sessionStorage.getItem("sortproperty") || 'ng')
@@ -232,6 +230,8 @@ angular.module('foodscan.articleListController', [])
       $scope.catFilter = JSON.parse(sessionStorage.getItem("catFilter")) || [];
       $scope.producerFilter = JSON.parse(sessionStorage.getItem("producerFilter")) || [];
       $scope.countryFilter = JSON.parse(sessionStorage.getItem("countryFilter")) || [];
+
+      setArticles();
     }
   }
   $timeout(init);

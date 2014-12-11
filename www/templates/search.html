@@ -1,4 +1,4 @@
-<ion-view hide-nav-bar="true" ng-controller="SearchController as search">
+<ion-view title="" hide-nav-bar="true" ng-controller="SearchController as search">
 <ion-header-bar class="bar bar-dark bar-header item-input-inset bar-search">
  	  <div class="item-input-wrapper">
     	<i class="icon ion-ios7-search placeholder-icon"></i>
@@ -16,8 +16,10 @@
   <div ng-show="articles.length > 0">
   	<ul class="list">
   		<li ng-click="search.goto({{article.dabas.GTIN}})" ng-repeat="article in articles" ng-class="article.dabas.images[0].Lank ? 'item-avatar' : ''" class="item item-light">
-        <img ng-show="article.dabas.images[0].Lank" ng-src="{{article.dabas.images[0].Lank}}"/>
-  			<h2 class="uppercase">{{ article.dabas.name }}</h2>
+        <div class="item-image-avatar" ng-show="article.dabas.images[0].Lank" >
+          <img ng-src="{{article.dabas.images[0].Lank}}"/>
+        </div>  			
+        <h2 class="uppercase">{{ article.dabas.name }}</h2>
         <p><span class="label">{{ article.dabas.producer }}</span> {{ article.dabas.country }}</p>
   		</li>
   	</ul>
