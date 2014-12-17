@@ -117,10 +117,6 @@ ion-view > .bar-subheader {
 /**
  * Start
  */
-.start-overlay {
-	background: #30D69B;
-	transition: all ease-in-out 250ms;
-}
 .start {
 	background-color: #30D69B;
 	background-image: linear-gradient(bottom, #114A35 50%, #30D69B 50%);
@@ -131,6 +127,7 @@ ion-view > .bar-subheader {
 }
 .start .scroll-content {
 	top: 19px !important;
+
 }
 .start .scroll {
 	height: 99% !important;
@@ -316,13 +313,14 @@ h1.article-title {
  * Animation
  */
 .fade-in-out.ng-enter, .fade-in-out .ng-enter {
-  -webkit-animation: fadeIn 0.3s;
-  animation: fadeIn 0.3s;
-  position: absolute; }
+  -webkit-animation: fadeIn 0.2s;
+  animation: fadeIn 0.2s;
+}
 .fade-in-out.ng-leave, .fade-in-out .ng-leave {
-  -webkit-animation: fadeOut 0.3s;
-  animation: fadeOut 0.3s;
-  position: absolute; }
+  -webkit-animation: fadeOut 0.2s;
+  animation: fadeOut 0.2s;
+  position: absolute;
+}
 
 /**
  * Loading overlay
