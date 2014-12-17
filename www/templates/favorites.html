@@ -1,8 +1,8 @@
-<ion-view title="Favoriter" ng-controller="FavoriteController as favorite">
+<ion-view title="Favoriter">
   <ion-nav-buttons side="right">
     <button ng-click="nav.toggleNav($event)" class="button button-icon nav-button icon ion-android-more"></button>
   </ion-nav-buttons>
-  <ion-content class="has-header">
+  <ion-content class="has-header" ng-controller="FavoriteController as favorite">
    <div ng-show="favs.length > 0">
   	<ion-list>
   		<ion-item ng-click="favorite.goto({{fav.id}})" ng-repeat="fav in favs" ng-class="fav.img ? 'item-avatar' : ''" class="item">
@@ -16,8 +16,7 @@
   	</ion-list>
    </div>
    <div ng-show="favs.length < 1">
-   	<p class="center padding-top">Du har inte lagt till några favoriter.</p>
+   	<div><p class="center padding-top">Du har inte lagt till några favoriter.</p></div>
    </div>
-    
   </ion-content>
 </ion-view>

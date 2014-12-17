@@ -1,7 +1,7 @@
 angular.module('foodscan.favoriteController', [])
 
 .controller("FavoriteController", function($scope, Articles, Favorite) {
-	$scope.favs = JSON.parse(localStorage["favorites"]);
+	$scope.favs = JSON.parse(localStorage.getItem("favorites")) || [];
 
 	this.goto = function(gtin) {
 	   Articles.goTo(gtin);
@@ -9,6 +9,6 @@ angular.module('foodscan.favoriteController', [])
 
 	$scope.toggleFav = function(id) {
     	$scope.favorite = Favorite.toggleFavorite(id);
-    	$scope.favs = JSON.parse(localStorage["favorites"]);
+    	$scope.favs = JSON.parse(localStorage.getItem("favorites")) || [];
   	}
 });
